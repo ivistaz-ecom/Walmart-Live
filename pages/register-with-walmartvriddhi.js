@@ -13,6 +13,8 @@ import NewsLetter from '../components/NewsLetter'
 import Floating from '../components/FloatingMenu'
 import Popups from '../components/PopUps'
 
+import Head from 'next/head';
+
 export default function App() {
 
     const resetForm = () => {
@@ -213,9 +215,6 @@ export default function App() {
     const router = useRouter();
     const { utm_source, utm_medium, utm_campaign, utm_id } = router.query;
     const query = router.query;
-    const title = "Register with WalmartVriddhi - Walmart Vriddhi"
-    const desc = "Fill the form to be a part of the Walmart Vriddhi program and unlock your business growth!"
-    const Myimg = "/images/registration_banner.png"
     const yourDate = new Date().toLocaleDateString('en-IN');
 
     const [hasErrors, setHasErrors] = useState(false);
@@ -496,44 +495,47 @@ export default function App() {
             });
     }
 
+    const title = "Register with WalmartVriddhi - Walmart Vriddhi"
+    const desc = "Fill the form to be a part of the Walmart Vriddhi program and unlock your business growth!"
+    const banner = "/images/registration_banner.png"
+    const url = "https://www.walmartvriddhi.org/register-with-walmartvriddhi/"
+
+
+    const structuredData = {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        "name": "walmartvriddhi",
+        "url": "https://www.walmartvriddhi.org/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": `${url}{search_term_string}`,
+            "query-input": "required name=search_term_string"
+        }
+    };
+
     return (
         <>
-            <NextSeo
-                noindex={true}
-                nofollow={true}
-                title={title}
-                description={desc}
-                canonical='https://www.walmartvriddhi.org/register-with-walmartvriddhi/'
-                openGraph={{
-                    url: "https://www.walmartvriddhi.org/register-with-walmartvriddhi/",
-                    title: title,
-                    description: desc,
-                    images: [
-                        {
-                            url: Myimg,
-                            width: 800,
-                            height: 600,
-                            alt: 'Walmart Vridhi',
-                            type: 'image/jpeg',
-                        },
-                        {
-                            url: Myimg,
-                            width: 900,
-                            height: 800,
-                            alt: 'Walmart Vridhi',
-                            type: 'image/jpeg',
-                        },
-                        { url: Myimg },
-                        { url: Myimg },
-                    ],
-                    siteName: { title },
-                }}
-                twitter={{
-                    handle: '@handle',
-                    site: '@site',
-                    cardType: 'summary_large_image',
-                }}
-            />
+            <Head>
+                <title>{title}</title>
+                <meta name="description" content={desc} />
+                <meta name="robots" content="index,follow"></meta>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/images/favicon.ico" />
+                <link rel="canonical" href={url} />
+                <meta property="og:locale" content="en_US" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={desc} />
+                <meta property="og:url" content={url} />
+                <meta property="og:site_name" content={title} />
+                <meta property="article:modified_time" content="2023-07-06T15:35:40+00:00" />
+                <meta property="og:image" content={banner} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+                />
+            </Head>
             <Header />
             <Container className="reg-page p-0 " fluid >
                 <p className="fs-4  text-center pt-5">Fill the form to be a part of the Walmart Vriddhi program and unlock your business growth!</p>
@@ -780,8 +782,8 @@ export default function App() {
 
                             <Image
                                 src='/images/register_img.png'
-                                width="100"
-                                height="100"
+                                width="300"
+                                height="800"
                                 background='no-repeat'
                                 background-size='cover'
                                 isResponsive
