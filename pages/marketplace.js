@@ -1,7 +1,7 @@
 import { React, useCallback, useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import Image from 'next/image'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo';
@@ -161,7 +161,7 @@ function MarketPlace() {
             </div>
 
           </Col></Row>
-        <h2 className='fs-1 text-center bogle-medium mt-5 mb-5'>Unique Features</h2>
+        <h2 className='fs-1 text-center bogle-medium mt-5 mb-5'>Courses</h2>
         <Row className='g-0'>
           <Col className='b-end b-bottom p-4' lg={3}>
             <div class="">
@@ -278,14 +278,26 @@ function MarketPlace() {
                   </div>
                 </div>
               </Col>
-
             </Row>
-
-
           </Container>
         </Container>
-
       </Container>
+
+      <Container>
+        <Col className='mt-5 mb-2 text-center'>
+          {/* Register with walmart vriddhi */}
+          <Link href="https://seller.walmart.com/signup" target='_blank'>
+            <Button className="rounded-5 py-2 mx-4 fw-bold border-0" style={{ background: '#FFC221' }}>
+              Register on the Walmart Seller Center
+            </Button>
+          </Link>
+        </Col>
+
+        <Col className='text-center'>
+          <p className='fs-5p-4 text-black'>Complete this course to become a seller on Walmart Marketplace</p>
+        </Col>
+      </Container>
+
       <Container className='my-5'>
         <Container className=' text-center mw-70'>
           <p className='fs-5 wbg-green p-4 text-white'>For more information, or to register, reach us at: <Link className='bogle-medium text-white text-decoration-none' href="tel:+916361056533">+91 6361 056 533</Link></p>
