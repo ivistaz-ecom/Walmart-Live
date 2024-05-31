@@ -34,8 +34,8 @@ const post = ({ data }) => {
             return (
               <>
                 <NextSeo
-                  noindex={false}
-                  nofollow={false}
+                  noindex={true}
+                  nofollow={true}
                   title={post['title']['rendered']}
                   description={string}
                   canonical=''
@@ -70,14 +70,28 @@ const post = ({ data }) => {
                   }}
                 />
 
-                <Container fluid key={post.id} className="success_post" style={{ backgroundImage: `url(${post['_embedded']['wp:featuredmedia'][0]['source_url']})` }}>
+                <Container fluid key={post.id} className=" p-0">
+                  <Image
+                    // src={post['acf']['wp:desktop_silder_image_bg']['url']}
+                    src={post['acf']['desktop_silder_image_bg']['url']}
+                    alt={post['title']['rendered']}
+                    className="w-100 h-auto"
+                    width={600}
+                    height={400}
+                    priority
+                  />
+
                 </Container>
                 <Brand />
                 <Container className="pt-4 pb-4">
-                  <Row>
-                    <Col className="pri_cat"><p className='bogle-bold fs-5 margin-center'>MSME SuperPower:</p></Col>
-                    <Col className="pri_ico"><Image src={post['acf']['primary_category_icon']['url']} className="primary_cat" alt={post['title']['rendered']} /></Col>
-                  </Row>
+                  <div className='d-flex flex-lg-row flex-column justify-content-center align-items-center'>
+                    <div className="  ">
+                      <p className='bogle-bold fs-5 margin-center p-2'>MSME SuperPower: </p>
+                    </div>
+                    <div className="  ">
+                      <Image src={post['acf']['primary_category_icon']['url']} className=" fluid" style={{height:"75px"}} alt={post['title']['rendered']} />
+                    </div>
+                  </div>
                 </Container>
 
                 <Container className="text-center mx-auto">
@@ -102,9 +116,9 @@ const post = ({ data }) => {
                       <p className="text-white fs-3 bogle-medium">{post['acf']['heading-1']}</p>
                     </Row>
 
-                    <Row>
-                      <Col><div dangerouslySetInnerHTML={{ __html: post['acf']['cloumn-1_heading-1'] }} className="text-white fs-5 bogle-medium"></div></Col>
-                      <Col><div dangerouslySetInnerHTML={{ __html: post['acf']['cloumn-2_heading-1'] }} className="text-white fs-5 bogle-medium"></div></Col>
+                    <Row >
+                      <Col lg={4} sm={12}><div dangerouslySetInnerHTML={{ __html: post['acf']['cloumn-1_heading-1'] }} className="text-white fs-5 bogle-medium"></div></Col>
+                      <Col lg={4} sm={12}><div dangerouslySetInnerHTML={{ __html: post['acf']['cloumn-2_heading-1'] }} className="text-white fs-5 bogle-medium"></div></Col>
                       <Col><div dangerouslySetInnerHTML={{ __html: post['acf']['cloumn-3_heading-1'] }} className="text-white fs-5 bogle-medium"></div></Col>
                     </Row>
 
@@ -117,8 +131,8 @@ const post = ({ data }) => {
                         <Col><div dangerouslySetInnerHTML={{ __html: post['acf']['paragraph-heading'] }} className=" fs-6 bogle-italic p-3 walmart-default"></div></Col>
                       </Row>
                       <Row className="p-3">
-                        <Col xs={12} lg={6}><Image src={post['acf']['product-image-left']['url']} alt="Walmart Vriddhi" width={300} height={300} className="w-100" /></Col>
-                        <Col xs={12} lg={6}><Image src={post['acf']['product-image-right']['url']} alt="Walmart Vriddhi" width={300} height={300} className="w-100" /></Col>
+                        <Col xs={12} lg={6}><Image src={post['acf']['product-image-left']['url']} alt="Walmart Vriddhi fluid" className="w-100 mb-3" /></Col>
+                        <Col xs={12} lg={6}><Image src={post['acf']['product-image-right']['url']} alt="Walmart Vriddhi"className="w-100" /></Col>
 
                       </Row>
                       <Row className="p-3">
@@ -132,9 +146,6 @@ const post = ({ data }) => {
                         <div dangerouslySetInnerHTML={{ __html: post['acf']['paragraph_end'] }} className="fs-5 bogle-medium h-bold"></div>
                       </Row>
                     </Container>
-
-
-
                   </Container>
                 </Container>
                 <Popups />
@@ -161,7 +172,7 @@ export async function getServerSideProps(context) {
   const { id } = context.params;
   const res = await fetch(`${configData.SERVER_URL}posts?_embed&slug=${id}`);
   const data = await res.json();
-  console.log(data)
+  // console.log(data)  
   return { props: { data } }
 
 }
