@@ -28,25 +28,25 @@ const SuccessStories = () => {
 
   const taxonomyName = "staging"; // Replace with your actual taxonomy name
   //const taxonomyUrl = `${configData.SERVER_URL}category_type/79`;
-const taxonomyUrl = `${configData.SERVER_FROM}custom/v1/category_type_post_count/?category_type=79&production=${configData.SERVER}`;
-const fetchTaxonomyCount = async () => {
-  try {
-    const response = await fetch(taxonomyUrl);
-    const data = await response.json();
+  const taxonomyUrl = `${configData.SERVER_FROM}custom/v1/category_type_post_count/?category_type=79&production=${configData.SERVER}`;
+  const fetchTaxonomyCount = async () => {
+    try {
+      const response = await fetch(taxonomyUrl);
+      const data = await response.json();
 
-    if (response.ok) {
-      const termCount = data.count;
-      const pages =   parseInt( termCount / postsPerPage )
+      if (response.ok) {
+        const termCount = data.count;
+        const pages = parseInt(termCount / postsPerPage)
 
-      setTotalPages(pages);
-      //console.log(`Total Count of ${taxonomyName} Taxonomy Terms:`, pages);
-    } else {
-      console.error(`Failed to fetch taxonomy information. Status: ${response.status}`);
+        setTotalPages(pages);
+        //console.log(`Total Count of ${taxonomyName} Taxonomy Terms:`, pages);
+      } else {
+        console.error(`Failed to fetch taxonomy information. Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error fetching taxonomy information:", error);
     }
-  } catch (error) {
-    console.error("Error fetching taxonomy information:", error);
-  }
-};
+  };
 
 
 
@@ -84,13 +84,13 @@ const fetchTaxonomyCount = async () => {
       const response = await fetch(url);
       const data = await response.json();
       setProfile(data);
-          // Update total pages calculation
-      
-      
+      // Update total pages calculation
+
+
       if (postsPerPage > data.length) {
         setHideNext(true);
         setshowPre(false);
-	setHide(false);
+        setHide(false);
       } else {
         setHideNext(false);
       }
@@ -99,7 +99,7 @@ const fetchTaxonomyCount = async () => {
       }
       if (data.length === 0) {
         setnoPost(true);
-	setHide(true);
+        setHide(true);
       }
 
     } catch (error) {
@@ -225,9 +225,9 @@ const fetchTaxonomyCount = async () => {
                   <div className="row g-0">
                     <div className="col-md-4">
                       <Image
-                        src={ 
+                        src={
                           post['_embedded']['wp:featuredmedia'][0]['source_url'] ?
-                          post['_embedded']['wp:featuredmedia'][0]['source_url'] : ''
+                            post['_embedded']['wp:featuredmedia'][0]['source_url'] : ''
 
                         }
                         className="profile-img img-fluid rounded-start"
@@ -245,7 +245,7 @@ const fetchTaxonomyCount = async () => {
                     </div>
                     <div className="col-md-8">
                       <div className="card-body">
-                      <h4 className="profile-title bogle-medium fs-5">{post['title']['rendered']}</h4>
+                        <h4 className="profile-title bogle-medium fs-5">{post['title']['rendered']}</h4>
                         <p className="card-text fs-6">{post['acf']['company_name_&_place']}</p>
                       </div>
                     </div>
@@ -273,10 +273,10 @@ const fetchTaxonomyCount = async () => {
                           <p className="fw-bold text-white fs-6">{post['acf']['business_category']}</p>
                           <Row className="sharerow">
                             <Col><Link href={`/walmart_graduates/${post['slug']}`} className="btn know">Know More</Link></Col>
-                            {post['acf']['visit_the_website'] ? 
-                            <Col>
-                              <Link href={post['acf']['visit_the_website']} className="btn know" target="_blank">Visit the website</Link> 
-                            </Col>: ''}
+                            {post['acf']['visit_the_website'] ?
+                              <Col>
+                                <Link href={post['acf']['visit_the_website']} className="btn know" target="_blank">Visit the website</Link>
+                              </Col> : ''}
                           </Row>
                         </Container>
                       </div>
@@ -300,24 +300,24 @@ const fetchTaxonomyCount = async () => {
           </Container>
         ) : (
           <>
-  <div className="d-flex justify-content-center mt-3">
-  <div className="btn-group" role="group" aria-label="Basic example">
-    {[...Array(totalPages)].map((_, index) => (
-      <Button
-        key={index}
-        onClick={() => handleNumberClick(index + 1)}
-        variant={page === index + 1 ? 'primary' : 'secondary'}
-      >
-        {index + 1}
-      </Button>
-    ))}
-  </div>
-</div>
+            <div className="d-flex justify-content-center mt-3">
+              <div className="btn-group" role="group" aria-label="Basic example">
+                {[...Array(totalPages)].map((_, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleNumberClick(index + 1)}
+                    variant={page === index + 1 ? 'primary' : 'secondary'}
+                  >
+                    {index + 1}
+                  </Button>
+                ))}
+              </div>
+            </div>
           </>
         )}
       </Container>
       <Container>
-<p className="fs-4 pb-5"><b className="bogle-medium">Disclaimer:</b> Information regarding profiles has been voluntarily shared by MSMEs who are responsible for the accuracy of data. In case of changes or edits required on any profile, MSMEs can reach out to us at <b className="bogle-medium">contactus@walmartvriddhi.org</b></p>
+        <p className="fs-4 pb-5"><b className="bogle-medium">Disclaimer:</b> Information regarding profiles has been voluntarily shared by MSMEs who are responsible for the accuracy of data. In case of changes or edits required on any profile, MSMEs can reach out to us at <b className="bogle-medium">contactus@walmartvriddhi.org</b></p>
 
       </Container>
     </div>

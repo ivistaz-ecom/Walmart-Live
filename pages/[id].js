@@ -17,45 +17,44 @@ const post = ({ data }) => {
     <div>
 
       {data.map((post, index) => (
-          <>
-<title>{ post['title']['rendered']}</title>          
-<meta name="description" content={ post['title']['rendered']}/>
-<meta name="keywords" content={post.acf.keywords} />
-<div dangerouslySetInnerHTML={{ __html: post.acf.meta_robots }} />
+        <>
+          <title>{post['title']['rendered']}</title>
+          <meta name="description" content={post['title']['rendered']} />
+          <meta name="keywords" content={post.acf.keywords} />
+          <div dangerouslySetInnerHTML={{ __html: post.acf.meta_robots }} />
 
-          </>
-        
+        </>
       ))}
       <Header />
       <div className='grid grid-cols-3 gap-5 w-full g-0'>
         {data.map((post, index) => (
-         <>
+          <>
             <Container fluid className="g-0">
               <Row className="g-0 flex-column flex-lg-row">
                 <Col style={{ background: '#306FC7' }} className="d-flex flex-column justify-content-center px-2">
                   <div dangerouslySetInnerHTML={{ __html: post['title']['rendered'] }} className="text-white blog-head fs-1 bogle-medium" />
                 </Col>
                 <Col>
-{post['_embedded']['wp:featuredmedia'][0]['source_url'] && (
-  <Image
-  src={post['_embedded']['wp:featuredmedia'][0]['source_url']}
-  alt={post['title']['rendered']}
-  width="100%"
-/>
-)}
-                  
+                  {post['_embedded']['wp:featuredmedia'][0]['source_url'] && (
+                    <Image
+                      src={post['_embedded']['wp:featuredmedia'][0]['source_url']}
+                      alt={post['title']['rendered']}
+                      width="100%"
+                    />
+                  )}
+
                 </Col>
               </Row>
             </Container>
             <Container className="pt-5">
-              <div dangerouslySetInnerHTML={{ __html: post['content']['rendered'] }}/>
+              <div dangerouslySetInnerHTML={{ __html: post['content']['rendered'] }} />
             </Container>
           </>
         ))}
       </div>
-      <Popups/>
-            <Floating/> 
-            <NewsLetter/>
+      <Popups />
+      <Floating />
+      <NewsLetter />
       <Footer />
     </div>
   );
