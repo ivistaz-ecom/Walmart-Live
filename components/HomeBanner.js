@@ -23,7 +23,7 @@ const Home = () => {
                 }
             `}</style>
             <div className="video-container">
-                <video className="video" autoPlay controls >
+                <video className="video" autoPlay muted controls playsInline>
                     <source src="https://docs.walmartvriddhi.org/wp-content/uploads/2024/05/Approved-WV-MSME-Summit-2024-Sizzle-Real.mp4" type="video/mp4" />
                 </video>
             </div>
