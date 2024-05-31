@@ -6,112 +6,112 @@ import Image from 'next/image'
 
 const Home = () => {
     return (
-        <>
-            <style jsx>{`
-                .video-container {
-                    text-align: center;
-                }
+        // <>
+        //     <style jsx>{`
+        //         .video-container {
+        //             text-align: center;
+        //         }
         
-                .video {
-                    width: 100%; /* Default width for mobile */
-                }
+        //         .video {
+        //             width: 100%; /* Default width for mobile */
+        //         }
         
-                @media (min-width: 768px) {
-                    .video {
-                        width: 75%; /* Width for desktop screens */
-                    }
-                }
-            `}</style>
-            <div className="video-container">
-                <video className="video" autoPlay muted controls playsInline>
-                    <source src="https://docs.walmartvriddhi.org/wp-content/uploads/2024/05/Approved-WV-MSME-Summit-2024-Sizzle-Real.mp4" type="video/mp4" />
-                </video>
-            </div>
-        </>
+        //         @media (min-width: 768px) {
+        //             .video {
+        //                 width: 75%; /* Width for desktop screens */
+        //             }
+        //         }
+        //     `}</style>
+        //     <div className="video-container">
+        //         <video className="video" autoPlay muted controls playsInline>
+        //             <source src="https://docs.walmartvriddhi.org/wp-content/uploads/2024/05/Approved-WV-MSME-Summit-2024-Sizzle-Real.mp4" type="video/mp4" />
+        //         </video>
+        //     </div>
+        // </>
 
-        //    <Carousel controls={false}>
-        // <Carousel.Item>
-        //               <Image
-        //           className="w-100 m-tm-none h-100"
-        //           src='/images/Banner_01.png'
-        //           alt="walmart vridhi registartion"
-        //           width={900}
-        //           height={710}  
-        //               />
-        //               <Image
-        //                 className="w-100 d-sm-none h-100"
-        //                 src='/images/HomeMobileBanne-1.jpeg'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
+           <Carousel controls={false}>
+        <Carousel.Item>
+                      <Image
+                  className="w-100 m-tm-none h-100"
+                  src='/images/Banner_01.png'
+                  alt="walmart vridhi registartion"
+                  width={900}
+                  height={710}  
+                      />
+                      <Image
+                        className="w-100 d-sm-none h-100"
+                        src='/images/HomeMobileBanne-1.jpeg'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
 
-        //       </Carousel.Item>
-        //       <Carousel.Item>
-        //               <Image
-        //                 className="w-100 m-tm-none h-100"
-        //                 src='/images/Banner_02.png'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
-        //               <Image
-        //                 className="w-100 d-sm-none h-100"
-        //                 src='/images/HomeMobileBanner-2.jpeg'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
-        //       </Carousel.Item>
-        //       <Carousel.Item>
-        //               <Image
-        //                 className="w-100 m-tm-none h-100"
-        //                 src='/images/Banner_03.png'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
-        //               <Image
-        //                 className="w-100 d-sm-none h-100"
-        //                 src='/images/HomeMobileBanner-3.jpeg'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
-        //       </Carousel.Item>
-        //       <Carousel.Item>
-        //               <Image
-        //                 className="w-100 m-tm-none h-100"
-        //                 src='/images/Banner_04.png'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
-        //               <Image
-        //                 className="w-100 d-sm-none h-100"
-        //                 src='/images/HomeMobileBanner-4.jpeg'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
-        //       </Carousel.Item>
-        //       <Carousel.Item>
-        //               <Image
-        //                 className="w-100 m-tm-none h-100"
-        //                 src='/images/Banner_05.png'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
-        //               <Image
-        //                 className="w-100 d-sm-none h-100"
-        //                 src='/images/HomeMobileBanner-5.jpeg'
-        //           alt="walmart vridhi"
-        //           width={900}
-        //           height={710}
-        //               />
-        //             </Carousel.Item> 
-        //        </Carousel>
+              </Carousel.Item>
+              <Carousel.Item>
+                      <Image
+                        className="w-100 m-tm-none h-100"
+                        src='/images/Banner_02.png'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
+                      <Image
+                        className="w-100 d-sm-none h-100"
+                        src='/images/HomeMobileBanner-2.jpeg'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
+              </Carousel.Item>
+              <Carousel.Item>
+                      <Image
+                        className="w-100 m-tm-none h-100"
+                        src='/images/Banner_03.png'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
+                      <Image
+                        className="w-100 d-sm-none h-100"
+                        src='/images/HomeMobileBanner-3.jpeg'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
+              </Carousel.Item>
+              <Carousel.Item>
+                      <Image
+                        className="w-100 m-tm-none h-100"
+                        src='/images/Banner_04.png'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
+                      <Image
+                        className="w-100 d-sm-none h-100"
+                        src='/images/HomeMobileBanner-4.jpeg'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
+              </Carousel.Item>
+              <Carousel.Item>
+                      <Image
+                        className="w-100 m-tm-none h-100"
+                        src='/images/Banner_05.png'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
+                      <Image
+                        className="w-100 d-sm-none h-100"
+                        src='/images/HomeMobileBanner-5.jpeg'
+                  alt="walmart vridhi"
+                  width={900}
+                  height={710}
+                      />
+                    </Carousel.Item> 
+               </Carousel>
 
     );
 
