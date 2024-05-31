@@ -157,7 +157,7 @@ function ContainerExample() {
               src="/images/about-us.png"
               alt='walmart about us'
               width={600}
-              height={600}
+              height={600} 
 
               className="ab-image m-tm-none img-fluid"
             />
