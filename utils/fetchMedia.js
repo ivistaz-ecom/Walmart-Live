@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import debounce from 'lodash.debounce';
 import { RotatingLines } from 'react-loader-spinner';
 import date from 'date-and-time';
-
+              
 const SuccessStories = () => {
   const pathname = usePathname();
   const [movies, setMovies] = useState([]);
@@ -92,7 +92,7 @@ const SuccessStories = () => {
                             <div className="bg-shadow">
                                     
                                 </div>
-                  <Card.Body className=" text-center">
+                  <Card.Body className="text-center">
                     <Card.Title className="fs-5 bogle-medium mb-4" style={{ minHeight: 80, height: 95 }} dangerouslySetInnerHTML={{ __html: post['title']['rendered'] }} />
                     <Link key={index} href={`${post['acf']['media_link']}`} target="_blank">
                       <Button variant="primary" className="news_btn fs-5">Read more</Button>
