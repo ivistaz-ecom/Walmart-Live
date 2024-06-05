@@ -29,6 +29,8 @@ const SearchResults = () => {
       // Filter out posts with category ID 24
       const filteredData = data.filter(post => post['categories'][0] !== 24);
 
+      console.log(filteredData)
+
       setMovies(filteredData);
       setLoading(false);
       if (filteredData.length === 0) {
@@ -66,12 +68,23 @@ const SearchResults = () => {
               let type = ''; // Declare type outside the if conditions
 
               if (post['categories'][0] === 12) {
-                type = 'type1';
+                type = 'success-story';
+                // success stories
+
               } else if (post['categories'][0] === 13) {
-                type = 'type2';
-              } else if (post['categories'][0] === 125) {
-                type = 'type3';
+                type = 'news-and-updates';
+                // news and updates
+
+              } else if (post['categories'][0] === 125) { 
+                type = '';             
+                // media
               }
+
+             else if (post['categories'][0] === 27) { 
+              type = '';             
+              // alumini profiles
+            }
+              
 
               return (
                 <Row className="py-3 justify-content-center" key={post.id}>
