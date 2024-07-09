@@ -580,6 +580,13 @@ border-top-right-radius:0px !important;
     background-repeat: no-repeat;
 }
 
+@media (max-width: 768px) {
+    .success_post {
+        height: 410px;
+    }
+}
+
+
 .primary_cat {
     height: 100%;
     width: 28% !important;

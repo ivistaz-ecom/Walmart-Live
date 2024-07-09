@@ -34,7 +34,7 @@ const SuccessStories = () => {
   const fetchMovies = async () => {
     setLoading(true);
     let url = "";
-    const urlPage = `${page}`;
+    const urlPage = `${page}`;      
     url = `${configData.SERVER_URL}posts?_embed&categories[]=12&&production[]=${configData.SERVER}&status[]=publish&per_page=${urlPage}`; //Staging Enviroment
     //url = `${configData.SERVER_URL}posts?_embed&categories[]=12&&production[]=77&status[]=publish&per_page=${urlPage}`; //Live Enviroment
     try {
