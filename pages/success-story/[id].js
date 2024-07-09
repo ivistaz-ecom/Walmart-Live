@@ -10,12 +10,16 @@ import { usePathname } from 'next/navigation'
 import NewsLetter from '../../components/NewsLetter'
 import Floating from '../../components/FloatingMenu'
 import Popups from '../../components/PopUps'
+import Head from 'next/head';
 
 const post = ({ data }) => {
   const pathname = usePathname()
   //console.log(data);
   return (
     <div>
+      <Head>
+      <link rel="icon" href="/images/favicon.ico" />
+      </Head>
       <Header />
 
       <div className='grid grid-cols-3 gap-5 w-full'>

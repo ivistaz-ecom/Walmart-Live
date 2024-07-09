@@ -104,7 +104,7 @@ const SuccessStories = ({ heroBannerpost }) => {
       <News/>
   
       <Popups/>
-            <Floating/> 
+            <Floa ting/> 
             <NewsLetter/>
       <Footer />
     </>
