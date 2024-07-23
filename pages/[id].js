@@ -21,6 +21,7 @@ const post = ({ data }) => {
           <title>{post['title']['rendered']}</title>
           <meta name="description" content={post['title']['rendered']} />
           <meta name="keywords" content={post.acf.keywords} />
+          <meta name="robots" content="index, follow" />
           <div dangerouslySetInnerHTML={{ __html: post.acf.meta_robots }} />
 
         </>

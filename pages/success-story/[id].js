@@ -38,8 +38,8 @@ const post = ({ data }) => {
             return (
               <>
                 <NextSeo
-                  noindex={true}
-                  nofollow={true}
+                  index={true}
+                  follow={true}
                   title={post['title']['rendered']}
                   description={string}
                   canonical=''
