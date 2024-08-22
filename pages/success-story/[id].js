@@ -11,6 +11,7 @@ import NewsLetter from '../../components/NewsLetter'
 import Floating from '../../components/FloatingMenu'
 import Popups from '../../components/PopUps'
 import Head from 'next/head';
+import { decode } from 'html-entities';
 
 const post = ({ data }) => {
   const pathname = usePathname()
@@ -34,45 +35,45 @@ const post = ({ data }) => {
               const newString = string.replace(regex, "");
               setString(newString);
             }, []);
-
+            const decodedTitle = decode(post['title']['rendered']);
             return (
               <>
-                <NextSeo
-                  index={true}
-                  follow={true}
-                  title={post['title']['rendered']}
-                  description={string}
-                  canonical=''
-                  openGraph={{
-                    url: '',
-                    title: post['title']['rendered'],
-                    description: string,
-                    images: [
-                      {
-                        url: post['_embedded']['wp:featuredmedia'][0]['source_url'],
-                        width: 800,
-                        height: 600,
-                        alt: string,
-                        type: 'image/jpeg',
-                      },
-                      {
-                        url: post['_embedded']['wp:featuredmedia'][0]['source_url'],
-                        width: 900,
-                        height: 800,
-                        alt: string,
-                        type: 'image/jpeg',
-                      },
-                      { url: post['_embedded']['wp:featuredmedia'][0]['source_url'] },
-                      { url: post['_embedded']['wp:featuredmedia'][0]['source_url'] },
-                    ],
-                    siteName: 'SiteName',
-                  }}
-                  twitter={{
-                    handle: '@handle',
-                    site: '@site',
-                    cardType: 'summary_large_image',
-                  }}
-                />
+               <NextSeo
+  index={true}
+  follow={true}
+  title={decodedTitle}
+  description={string}
+  canonical=''
+  openGraph={{
+    url: '',
+    title: decodedTitle,
+    description: string,
+    images: [
+      {
+        url: post['_embedded']['wp:featuredmedia'][0]['source_url'],
+        width: 800,
+        height: 600,
+        alt: string,
+        type: 'image/jpeg',
+      },
+      {
+        url: post['_embedded']['wp:featuredmedia'][0]['source_url'],
+        width: 900,
+        height: 800,
+        alt: string,
+        type: 'image/jpeg',
+      },
+      { url: post['_embedded']['wp:featuredmedia'][0]['source_url'] },
+      { url: post['_embedded']['wp:featuredmedia'][0]['source_url'] },
+    ],
+    siteName: 'SiteName',
+  }}
+  twitter={{
+    handle: '@handle',
+    site: '@site',
+    cardType: 'summary_large_image',
+  }}
+/>
 
                 <Container fluid key={post.id} className=" p-0">
                   <Image
