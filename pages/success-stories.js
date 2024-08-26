@@ -14,7 +14,9 @@ import NewsLetter from '../components/NewsLetter'
 import Floating from '../components/FloatingMenu'
 import Popups from '../components/PopUps'
 import Image from 'next/image'
-import Head from "next/head";
+import SuccessVideos from "../utils/fetchSuccessVideos";
+import Aos from "aos";
+
 
 const SuccessStories = () => {
   const pathname = usePathname()
@@ -34,7 +36,7 @@ const SuccessStories = () => {
   const fetchMovies = async () => {
     setLoading(true);
     let url = "";
-    const urlPage = `${page}`;      
+    const urlPage = `${page}`;
     url = `${configData.SERVER_URL}posts?_embed&categories[]=12&&production[]=${configData.SERVER}&status[]=publish&per_page=${urlPage}`; //Staging Enviroment
     //url = `${configData.SERVER_URL}posts?_embed&categories[]=12&&production[]=77&status[]=publish&per_page=${urlPage}`; //Live Enviroment
     try {
@@ -85,42 +87,79 @@ const SuccessStories = () => {
       return oldPage + 4;
     });
   };
+  useEffect(() => {
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
 
-  const structuredData = {
-    "@context": "https://schema.org/",
-    "@type": "WebSite",
-    "name": "walmartvriddhi",
-    "url": "https://www.walmartvriddhi.org/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": `${url}{search_term_string}`,
-      "query-input": "required name=search_term_string"
-    }
-  };
+    const tabs = $$(".tab-item");
+    const panes = $$(".tab-pane");
+
+    const tabActive = $(".tab-item.active");
+    const line = $(".tabs .line");
+
+    // requestIdleCallback(function () {
+    //     line.style.left = tabActive.offsetLeft + "px";
+    //     line.style.width = tabActive.offsetWidth + "px";
+
+    // });
+
+    tabs.forEach((tab, index) => {
+      const pane = panes[index];
+
+      tab.onclick = function () {
+        $(".tab-item.active").classList.remove("active");
+        $(".tab-pane.active").classList.remove("active");
+
+        line.style.left = this.offsetLeft + "px";
+        line.style.width = this.offsetWidth + "px";
+
+        this.classList.add("active");
+        pane.classList.add("active");
+      };
+    });
+
+  }, []);
+
+
 
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={desc} />
-        <meta name="robots" content="index,follow"></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/favicon.ico" />
-        <link rel="canonical" href={url} />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={desc} />
-        <meta property="og:url" content={url} />
-        <meta property="og:site_name" content={title} />
-        <meta property="article:modified_time" content="2023-07-06T15:35:40+00:00" />
-        <meta property="og:image" content={banner} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-      </Head>
+    <div>
+      <NextSeo
+        noindex={true}
+        nofollow={true}
+        title={title}
+        description={desc}
+        canonical={pathname}
+        openGraph={{
+          url: pathname,
+          title: title,
+          description: desc,
+          images: [
+            {
+              url: banner,
+              width: 800,
+              height: 600,
+              alt: 'Walmart Vridhi',
+              type: 'image/jpeg',
+            },
+            {
+              url: banner,
+              width: 900,
+              height: 800,
+              alt: 'Walmart Vridhi',
+              type: 'image/jpeg',
+            },
+            { url: banner },
+            { url: banner },
+          ],
+          siteName: title,
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+      />
       <Header />
       <Image
         src={banner}
@@ -133,20 +172,50 @@ const SuccessStories = () => {
 
       />
       <Brand />
-      <Container className="text-center wbg-light-gy">
+      {/* <Container className="text-center wbg-light-gy">
         <p className="fs-1 bogle-medium walmart-default" >MSME Success Stories</p>
         <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="MSME Success Stories" />
         <p className="fs-3">We are proud to be part of business journeys that have turned into stories of inspiration and success. Take a look at some of our growth stories.</p>
-      </Container>
+      </Container> */}
 
-      <Success />
+      {/* <Success /> */}
       <Popups />
       <Floating />
+      <Container fluid className="wbg-main p-0 overflow-hidden">
+        <Container className="text-center">
+          <p className="fs-2 bogle-medium text-white pt-3" >Inspiring Journeys of Walmart Vriddhi MSMEs</p>
+          <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Industry Connect Series" />
+        </Container>
+        <Container>
+          <div className="tabs">
+            <div className="tab-item active" data-aos="fade-right">
+              <Image src="/images/success/time-svg.svg" alt="msme training Program online" className="img mt-2" width={50} height={50} />
+              <span className="eael-tab-title bogle-medium walmart-default mt-2">Impact Narratives</span>
+            </div>
+            <div className="tab-item" data-aos="fade-left">
+              <Image src="/images/success/stories-icon.svg" alt="msme training Program online" className="img mt-2" width={50} height={50} />
+              <span className="eael-tab-title bogle-medium walmart-default mt-2">Video Stories</span>
+            </div>
+            <div className="line"></div>
+          </div>
+        </Container>
+        <Container fluid className='overflow-hidden' style={{ background: '#ffff' }} data-aos="fade-up">
+          <div className="tab-content">
+            <div className="tab-pane active" >
+              <Success />
+            </div>
+            {/* 2nd tab starts here  */}
+            <div className="tab-pane" >
+              <SuccessVideos />
+            </div>
+          </div>
+        </Container>
+      </Container>
       <NewsLetter />
       <Footer />
 
 
-    </>
+    </div>
   );
 };
 
