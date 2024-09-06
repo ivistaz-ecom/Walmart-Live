@@ -29,7 +29,7 @@ export default function App() {
         setSelectedSource("");
         setOtherSource("");
         SetSelectCountry('IN');
-        SetSelectState('KA');
+        SetSelectState("");
         // Add any additional state variables that need to be reset
     };
 
@@ -209,7 +209,7 @@ export default function App() {
     const [otherSource, setOtherSource] = useState(""); // Track the value of the "Other" source input
     const [isCheckboxChecked, setIsCheckboxChecked] = useState(true);
     const [selectCountry, SetSelectCountry] = useState('IN');
-    const [selectState, SetSelectState] = useState('KA');
+    const [selectState, SetSelectState] = useState(null);
 
 
     const router = useRouter();
