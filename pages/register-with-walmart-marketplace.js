@@ -205,7 +205,7 @@ export default function App() {
     const [otherSource, setOtherSource] = useState(""); // Track the value of the "Other" source input
     const [isCheckboxChecked, setIsCheckboxChecked] = useState(true);
     const [selectCountry, SetSelectCountry] = useState('IN');
-    const [selectState, SetSelectState] = useState('KA');
+    const [selectState, SetSelectState] = useState('');
 
     const [yourExporting, setExporting] = React.useState('yes');
     const [youreCommerce, seteCommerce] = React.useState('yes');
