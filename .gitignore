@@ -7,7 +7,7 @@
 .yarn/install-state.gz
 
 # local environment configuration
-config.json
+# config.json
 
 
 
