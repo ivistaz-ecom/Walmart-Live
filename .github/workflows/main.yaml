@@ -22,6 +22,6 @@ jobs:
             cd /home/react/wv-react
             git config --global --add safe.directory /home/react/wv-react
             git pull origin main
-            # npm install
+            npm install
             # npm run build
             # pm2 restart 5
