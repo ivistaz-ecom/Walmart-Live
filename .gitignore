@@ -6,6 +6,11 @@
 .pnp.js
 .yarn/install-state.gz
 
+# local environment configuration
+# config.json
+
+
+
 # testing
 /coverage
 
