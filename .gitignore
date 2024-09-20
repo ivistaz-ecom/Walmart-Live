@@ -8,6 +8,8 @@
 
 # local environment configuration
 config.json
+/public/robots.txt
+/public/sitemap.xml
 
 
 
