@@ -7,9 +7,9 @@
 .yarn/install-state.gz
 
 # local environment configuration
-config.json
-/public/robots.txt
-/public/sitemap.xml
+# config.json
+# /public/robots.txt
+# /public/sitemap.xml
 
 
 
