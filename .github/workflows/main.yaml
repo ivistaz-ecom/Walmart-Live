@@ -16,15 +16,14 @@ jobs:
           host: ${{ secrets.HOST }} # Your server's IP address
           username: ${{ secrets.USERNAME }} # Your server's username
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Your server's SSH private key
-          passphrase: ${{ secrets.SSH_PASSPHRASE }} # Your server's SSH password
+          passphrase: ${{ secrets.SSH_PASSPHRASE }} # Your server's SSH passphrase
 
           script: |
-            echo ${{ secrets.PASSWORD }} | sudo -S jalal
+            echo ${{ secrets.PASSWORD }} | sudo -S su jalal
             cd /home/react/wv-react
             echo ${{ secrets.PASSWORD }} | sudo -S git config --global --add safe.directory /home/react/wv-react
-            # echo ${{ secrets.PASSWORD }} | sudo -S sudo su
-            # echo ${{ secrets.PASSWORD }} | sudo -S git pull origin main
-            # echo ${{ secrets.PASSWORD }} | sudo -S rm -r node_modules/
-            # echo ${{ secrets.PASSWORD }} | sudo -S npm install
-            # echo ${{ secrets.PASSWORD }} | sudo -S npm run build
-            # echo ${{ secrets.PASSWORD }} | sudo -S pm2 restart 0
+            echo ${{ secrets.PASSWORD }} | sudo -S git pull origin main
+            echo ${{ secrets.PASSWORD }} | sudo -S rm -r node_modules/
+            echo ${{ secrets.PASSWORD }} | sudo -S npm install
+            echo ${{ secrets.PASSWORD }} | sudo -S npm run build
+            echo ${{ secrets.PASSWORD }} | sudo -S pm2 restart 0
