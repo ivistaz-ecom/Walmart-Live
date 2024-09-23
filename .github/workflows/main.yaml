@@ -19,7 +19,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }} # Your server's SSH password
 
           script: |
-            echo ${{ secrets.PASSWORD }} | sudo -S sudo su jalal
+            echo ${{ secrets.PASSWORD }} | sudo -S jalal
             cd /home/react/wv-react
             echo ${{ secrets.PASSWORD }} | sudo -S git config --global --add safe.directory /home/react/wv-react
             # echo ${{ secrets.PASSWORD }} | sudo -S sudo su
