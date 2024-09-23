@@ -15,33 +15,54 @@ const SuccessStories = () => {
   const [next, setNext] = useState();
   const [total, setTotal] = useState(0);
   const [end, setEnd] = useState(false);
+  
+  const domain = typeof window !== 'undefined' ? window.location.hostname : '';
 
-  const fetchContent = useCallback(async () => {
-    setLoading(true);
-
+  const fetchContent = async () => {
     try {
-      const [moviesResponse, categoriesResponse] = await Promise.all([
-        fetch(`${configData.SERVER_URL}posts?_embed&categories[]=13&&production[]=${configData.SERVER}&status[]=publish&per_page=${page}`),
-        fetch(`${configData.SERVER_URL}categories/13`)
-      ]);
-
-      const moviesData = await moviesResponse.json();
-      const categoriesData = await categoriesResponse.json();
-
-      if (moviesData.length === 0) {
-        setEnd(true);
+      let server
+  
+      if (
+        domain === 'walmartvriddhi.org' ||
+        domain === 'www.walmartvriddhi.org'
+      ) {
+        server = '79'
+      } else if (domain === 'staging.walmartvriddhi.org') {
+        server = '78'
       } else {
-        setMovies(moviesData);
-        setTotal(categoriesData.count);
-        setNext(categoriesData);
+        server = '78' // default server
       }
-
-      setLoading(false);
+  
+      const [moviesResponse, categoriesResponse] = await Promise.all([
+        fetch(
+          `${configData.SERVER_URL}posts?_embed&categories[]=13&production[]=${server}&status[]=publish&per_page=${page}`
+        ),
+        fetch(`${configData.SERVER_URL}categories/13`),
+      ])
+  
+      const moviesData = await moviesResponse.json()
+      const categoriesData = await categoriesResponse.json()
+  
+      if (moviesData.length === 0) {
+        setEnd(true) // No more movies to load
+      } else {
+        setMovies(moviesData) // Set movies data
+        setTotal(categoriesData.count) // Set total count from categories data
+        setNext(categoriesData) // Update next category data
+      }
+  
+      setLoading(false) // End loading state
     } catch (error) {
-      console.error(error);
-      setLoading(false);
+      console.error('Error fetching data: ', error)
+      setLoading(false) // End loading state on error
     }
-  }, [page]);
+  }
+  
+  // Call fetchContent whenever `page` changes
+  useEffect(() => {
+    fetchContent()
+  }, [page])
+  
 
   const debouncedFetchContent = useCallback(debounce(fetchContent, 500), [page]);
 
