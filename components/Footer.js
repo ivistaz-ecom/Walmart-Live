@@ -51,7 +51,7 @@ function Footer() {
                             <p className="fs-3 bogle-medium">Sitemap</p>
                             <hr />
                             <ul className="fs-4 list-unstyled">
-                                <li className="f-text"><Link href="/about-us" className={pathname == "/about-us" ? "activef" : ""}>About</Link></li>
+                                <li className="f-text"><Link href="/about-us" className={pathname == "/about-us" ? "activef" : ""}>About Us</Link></li>
                                 <li className="f-text"><Link href="/msme-growth-journey" className={pathname == "/msme-growth-journey" ? "activef" : ""}>MSME growth journey</Link></li>
                                 <li className="f-text"><Link href="/success-stories" className={pathname == "/success-stories" ? "activef" : ""}>Success Stories</Link></li>
                                 <li className="f-text"><Link href="/alumni-profiles" className={pathname == "/alumni-profiles" ? "activef" : ""}>Alumni Profiles</Link></li>
@@ -59,7 +59,7 @@ function Footer() {
                                 <li className="f-text"><Link href="/newsroom" className={pathname == "/newsroom" ? "activef" : ""}>Newsroom</Link></li>
                                 <li className="f-text"><Link href="/marketplace" className={pathname == "/marketplace" ? "activef" : ""}>Marketplace</Link></li>
 				<li className="f-text"><Link href="/walmart-vriddhi-msme-summit-2024" className={pathname == "/walmart-vriddhi-msme-summit-2024" ? "activef" : ""}>MSME Summit 2024</Link></li>
-                                <li className="f-text"><Link href="/contact-us" className={pathname == "/contact-us" ? "activef" : ""}>Contact</Link></li>
+                                <li className="f-text"><Link href="/contact-us" className={pathname == "/contact-us" ? "activef" : ""}>Contact Us.</Link></li>
                             </ul>
                         </Col>
                         <Col className="px-4 text-white" sm={3} xs={12}>
