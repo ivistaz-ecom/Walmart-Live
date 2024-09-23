@@ -51,7 +51,7 @@ function Footer() {
                             <p className="fs-3 bogle-medium">Sitemap</p>
                             <hr />
                             <ul className="fs-4 list-unstyled">
-                                <li className="f-text"><Link href="/about-us" className={pathname == "/about-us" ? "activef" : ""}>About us</Link></li>
+                                <li className="f-text"><Link href="/about-us" className={pathname == "/about-us" ? "activef" : ""}>About</Link></li>
                                 <li className="f-text"><Link href="/msme-growth-journey" className={pathname == "/msme-growth-journey" ? "activef" : ""}>MSME growth journey</Link></li>
                                 <li className="f-text"><Link href="/success-stories" className={pathname == "/success-stories" ? "activef" : ""}>Success Stories</Link></li>
                                 <li className="f-text"><Link href="/alumni-profiles" className={pathname == "/alumni-profiles" ? "activef" : ""}>Alumni Profiles</Link></li>
