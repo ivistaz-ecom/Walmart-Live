@@ -26,11 +26,11 @@ const SuccessStories = () => {
         domain === 'walmartvriddhi.org' ||
         domain === 'www.walmartvriddhi.org'
       ) {
-        server = '79'
+        server = `${configData.LIVE_SERVER}`
       } else if (domain === 'staging.walmartvriddhi.org') {
-        server = '78'
+        server = `${configData.STAG_SERVER}`
       } else {
-        server = '78' // default server
+          server = `${configData.STAG_SERVER}`
       }
   
       const [moviesResponse, categoriesResponse] = await Promise.all([
@@ -98,7 +98,7 @@ const SuccessStories = () => {
                     alt={post['title']['rendered']}
                     className="news-img"
                     width={600}
-                      height={250}
+                      height={230}
                   />
 )}
                   <div className="ribbon-wrapper">
@@ -143,7 +143,7 @@ const SuccessStories = () => {
 
         ) : (
           <div className="loadmodediv">
-          {end ? (<p>No more posts to load</p>) : (<Button variant="primary" className="authors_btn fs-5" onClick={loadMore}  >Load more</Button>
+          {end ? (<h2 className="mt-4 text-center">No more posts to Load</h2>) : (<Button variant="primary" className="authors_btn fs-5" onClick={loadMore}  >Load more</Button>
                     )}</div> )}
       </section>
 
