@@ -16,10 +16,11 @@ const SuccessStories = () => {
   const [total, setTotal] = useState(0);
   const [end, setEnd] = useState(false);
   
-  const domain = typeof window !== 'undefined' ? window.location.hostname : '';
+    const domain = typeof window !== 'undefined' ? window.location.hostname : '';
 
   const fetchContent = async () => {
     try {
+      // define server
       let server
   
       if (
@@ -32,6 +33,8 @@ const SuccessStories = () => {
       } else {
           server = `${configData.STAG_SERVER}`
       }
+      
+      // server end
   
       const [moviesResponse, categoriesResponse] = await Promise.all([
         fetch(

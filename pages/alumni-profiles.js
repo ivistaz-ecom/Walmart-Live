@@ -1,31 +1,30 @@
-import React, { useEffect, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
+import Head from 'next/head';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import configData from "../config.json";
 
 import Header from '../components/Header';
 import Brand from '../components/BrandLogo';
 import Footer from '../components/Footer';
-import configData from "../config.json";
-import { NextSeo } from 'next-seo';
-import { usePathname } from 'next/navigation'
-import Image from 'next/image'
-import Carousel from '../components/AlumniCarousel'
-import Video from '../components/AlumniVideo'
-import News from '../components/AlumniNew'
+import Carousel from '../components/AlumniCarousel';
+import Video from '../components/AlumniVideo';
+import News from '../components/AlumniNew';
 import Share from '../components/AlumniShare';
 import Profile from '../components/AlumniProfile';
-import NewsLetter from '../components/NewsLetter'
+import NewsLetter from '../components/NewsLetter';
 import Floating from '../components/FloatingMenu';
 import Popups from '../components/PopUps';
-import Head from 'next/head';
 
-const alumniProfiles = () => {
-  const pathname = usePathname()
+const AlumniProfiles = () => {
+  const pathname = usePathname();
+
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(10);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({});
-  const [next, setNext] = useState();
-  const [total, setTotal] = useState();
+  const [next, setNext] = useState(null);
+  const [total, setTotal] = useState(null);
   const [end, setEnd] = useState(true);
   const [selectedFilter, setSelectedFilter] = useState('all');
 
@@ -34,66 +33,66 @@ const alumniProfiles = () => {
   const banner = '/images/alumni_profile_banner.png';
   const url = 'https://www.walmartvriddhi.org/alumni-profiles/';
 
+  // Determine server based on domain
+  const domain = typeof window !== 'undefined' ? window.location.hostname : '';
+  let server;
+  if (domain === 'walmartvriddhi.org' || domain === 'www.walmartvriddhi.org') {
+    server = configData.LIVE_SERVER;
+  } else if (domain === 'staging.walmartvriddhi.org') {
+    server = configData.STAG_SERVER;
+  } else {
+    server = configData.STAG_SERVER; // Default to staging server
+  }
 
+  // Fetch movies
   const fetchMovies = async () => {
     setLoading(true);
-    let url = "";
     const urlPage = `${page}`;
-    url = `${configData.SERVER_URL}msme_speaks?_embed&production[]=${configData.SERVER}&status[]=publish&per_page=${urlPage}`; //Staging Enviroment
+    const url = `${server}msme_speaks?_embed&production[]=${configData.SERVER}&status[]=publish&per_page=${urlPage}`;
+
     try {
       const response = await fetch(url);
       const data = await response.json();
-      //console.log(data);
       setMovies(data);
-      setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
+  // Fetch next categories
   const fetchNos = async () => {
     setLoading(true);
-    let cat = "";
-    cat = `${configData.SERVER_URL}categories/12`;
+    const catUrl = `${server}categories/12`;
 
     try {
-      const response = await fetch(cat);
+      const response = await fetch(catUrl);
       const cats = await response.json();
-      //console.log(cats);
       setNext(cats);
-      setLoading(false);
-
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
-
-
-
+  // Handle component mount
   useEffect(() => {
     fetchMovies();
     fetchNos();
-  }, [page], [next]);
+  }, [page]);
 
-
+  // Load more data
   const loadMore = () => {
-    setTotal(next.count)
-    //console.log(total)
-    const main = next.count;
-
-    if (total == page) {
+    if (next && total === page) {
       setEnd(false);
+    } else {
+      setPage((prevPage) => prevPage + 2);
     }
-
-    setPage((oldPage) => {
-      return oldPage + 2;
-    })
   };
 
-
-
-
+  // Structured Data for SEO
   const structuredData = {
     "@context": "https://schema.org/",
     "@type": "WebSite",
@@ -102,7 +101,7 @@ const alumniProfiles = () => {
     "potentialAction": {
       "@type": "SearchAction",
       "target": `${url}{search_term_string}`,
-      "query-input": "required name=search_term_string"
+      "query-input": "required name=search_term_string",
     }
   };
 
@@ -111,7 +110,7 @@ const alumniProfiles = () => {
       <Head>
         <title>{title}</title>
         <meta name="description" content={desc} />
-        <meta name="robots" content="index,follow"></meta>
+        <meta name="robots" content="index,follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/favicon.ico" />
         <link rel="canonical" href={url} />
@@ -129,64 +128,68 @@ const alumniProfiles = () => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </Head>
+
       <Header />
       <Image
         src={banner}
-        width="900"
-        height="620"
-        background='no-repeat'
-        background-size='cover'
+        width={900}
+        height={620}
         className="banner-img w-100 h-auto"
-
+        alt="Alumni Profile Banner"
       />
       <Brand />
+
       <Container className="text-center">
-        <h1 className="fs-1 bogle-medium " >Walmart Vriddhi Alumni</h1>
+        <h1 className="fs-1 bogle-medium">Walmart Vriddhi Alumni</h1>
         <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Walmart Vriddhi Alumni" />
         <p className="fs-3">
-          Walmart Vriddhi supplier development program has assisted over 25,000 MSMEs in India to help them enhance their domestic capabilities and participate in the global economy.</p>
+          Walmart Vriddhi supplier development program has assisted over 25,000 MSMEs in India to help them enhance their domestic capabilities and participate in the global economy.
+        </p>
       </Container>
+
       <Container fluid className='wbg-gy pt-5'>
         <Container className="text-center">
-          <p className="fs-1 bogle-medium " >Meet the Walmart Vriddhi Graduates</p>
+          <p className="fs-1 bogle-medium">Meet the Walmart Vriddhi Graduates</p>
           <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Walmart Vriddhi Alumni" />
-          <p className="fs-3">
-            Introducing our graduates who successfully finished the program.</p>
+          <p className="fs-3">Introducing our graduates who successfully finished the program.</p>
         </Container>
         <Container>
           <Profile />
         </Container>
       </Container>
-      <Container>
-      </Container>
-      <Container className="text-center wbg-main" fluid>
-        <Container className='pt-5'>
-          <p className="fs-1 bogle-medium text-white" >Program Beneficiaries</p>
-          <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Walmart Vriddhi Alumni" />
+
+      <Container fluid className="text-center wbg-main pt-5">
+        <Container>
+          <p className="fs-1 bogle-medium text-white">Program Beneficiaries</p>
+          <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Program Beneficiaries" />
           <Carousel />
         </Container>
       </Container>
+
       <Container className="text-center pt-5">
-        <p className="fs-1 bogle-medium walmart-default" >MSME Speaks</p>
-        <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Walmart Vriddhi Alumni" />
+        <p className="fs-1 bogle-medium walmart-default">MSME Speaks</p>
+        <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="MSME Speaks" />
         <p className="fs-4">Hear from our graduates about their experience of the Walmart Vriddhi program and how it benefitted them.</p>
         <Video />
       </Container>
 
       <Container fluid className='wbg-gy pt-5 pb-5 mt-5'>
         <Container className="text-center">
-          <p className="fs-1 bogle-medium walmart-default" >Alumni Achievements</p>
-          <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Walmart Vriddhi Alumni" />
+          <p className="fs-1 bogle-medium walmart-default">Alumni Achievements</p>
+          <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Alumni Achievements" />
           <p className="fs-3">A collection of events that define the journey of Walmart Vriddhi graduates.</p>
         </Container>
         <Container>
-          <News /></Container>
+          <News />
+        </Container>
       </Container>
-      <Container className="text-center wbg-main " fluid>
-        <p className="fs-1 bogle-medium text-white mt-5" >Alumni Corner</p>
-        <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Walmart Vriddhi Alumni" />
+
+      <Container className="text-center wbg-main" fluid>
+        <p className="fs-1 bogle-medium text-white mt-5">Alumni Corner</p>
+        <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Alumni Corner" />
         <Share />
       </Container>
+
       <Popups />
       <Floating />
       <NewsLetter />
@@ -195,4 +198,4 @@ const alumniProfiles = () => {
   );
 };
 
-export default alumniProfiles;
+export default AlumniProfiles;

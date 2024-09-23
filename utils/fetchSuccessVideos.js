@@ -18,9 +18,27 @@ const FetchSuccessVideos = () => {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  const domain = typeof window !== 'undefined' ? window.location.hostname : '';
+
   const fetchContent = useCallback(async () => {
     setLoading(true);
     try {
+
+      // define server
+      let server
+  
+      if (
+        domain === 'walmartvriddhi.org' ||
+        domain === 'www.walmartvriddhi.org'
+      ) {
+        server = `${configData.LIVE_SERVER}`
+      } else if (domain === 'staging.walmartvriddhi.org') {
+        server = `${configData.STAG_SERVER}`
+      } else {
+          server = `${configData.STAG_SERVER}`
+      }
+
+      // server end
       const [moviesResponse, categoriesResponse] = await Promise.all([
         fetch(`${configData.SERVER_URL}posts?_embed&categories[]=128&production[]=${configData.SERVER}&status[]=publish&per_page=${page}`),
         fetch(`${configData.SERVER_URL}categories/128`)

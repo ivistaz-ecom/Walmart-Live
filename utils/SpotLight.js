@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Card, Button, Col, Row, Modal, Container } from 'react-bootstrap';
-import Link from 'next/link'
+import { Card, Button, Col, Row, Modal, Container } from "react-bootstrap";
+import Link from "next/link";
 import configData from "../config.json";
-import { usePathname } from 'next/navigation'
-import debounce from 'lodash.debounce';
-import { RotatingLines } from 'react-loader-spinner';
-import date from 'date-and-time';
-import Image from 'next/image'
+import { usePathname } from "next/navigation";
+import debounce from "lodash.debounce";
+import { RotatingLines } from "react-loader-spinner";
+import date from "date-and-time";
+import Image from "next/image";
 
 const SuccessStories = () => {
   const pathname = usePathname();
@@ -15,20 +15,40 @@ const SuccessStories = () => {
   const [loading, setLoading] = useState(false);
   const [next, setNext] = useState();
   const [total, setTotal] = useState(0);
-    const [end, setEnd] = useState(false);
-    const [isOpen, setOpen] = useState(false);
-    const handleClose = () => setProduct(false);
-    const [currentProduct, setProduct] = useState(null);
-    const [currentUrl, setUrl] = useState(null);
-    const [currentTitle, setTitle] = useState(null);
+  const [end, setEnd] = useState(false);
+  const [isOpen, setOpen] = useState(false);
+  const handleClose = () => setProduct(false);
+  const [currentProduct, setProduct] = useState(null);
+  const [currentUrl, setUrl] = useState(null);
+  const [currentTitle, setTitle] = useState(null);
+
+  const domain = typeof window !== "undefined" ? window.location.hostname : "";
 
   const fetchContent = useCallback(async () => {
     setLoading(true);
 
     try {
+      // define server
+
+      let server;
+
+      if (
+        domain === "walmartvriddhi.org" ||
+        domain === "www.walmartvriddhi.org"
+      ) {
+        server = `${configData.LIVE_SERVER}`;
+      } else if (domain === "staging.walmartvriddhi.org") {
+        server = `${configData.STAG_SERVER}`;
+      } else {
+        server = `${configData.STAG_SERVER}`;
+      }
+      // server end
+
       const [moviesResponse, categoriesResponse] = await Promise.all([
-        fetch(`${configData.SERVER_URL}msme_spotlight?_embed&status=publish&production[]=${configData.SERVER}&per_page=${page}`),
-        fetch(`${configData.SERVER_URL}categories/13`)
+        fetch(
+          `${configData.SERVER_URL}msme_spotlight?_embed&status=publish&production[]=${configData.SERVER}&per_page=${page}`
+        ),
+        fetch(`${configData.SERVER_URL}categories/13`),
       ]);
 
       const moviesData = await moviesResponse.json();
@@ -49,7 +69,9 @@ const SuccessStories = () => {
     }
   }, [page]);
 
-  const debouncedFetchContent = useCallback(debounce(fetchContent, 500), [page]);
+  const debouncedFetchContent = useCallback(debounce(fetchContent, 500), [
+    page,
+  ]);
 
   useEffect(() => {
     fetchContent();
@@ -66,88 +88,126 @@ const SuccessStories = () => {
   };
 
   return (
-      <div>
-          <Modal
-                  show={currentProduct}
-                  onHide={handleClose}
-                  closeTimeoutMS={300}
-                  isOpen={Boolean(currentProduct)}
-                  onRequestClose={() => setProduct(null)}
-                  size="lg"
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title dangerouslySetInnerHTML={{ __html: currentTitle }} />
-                  </Modal.Header>
-                  <Modal.Body><iframe width="100%" height="400" src={currentUrl} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></Modal.Body>
-                </Modal>
-     <Container style={{ background: '#dee2e6' }} fluid>
+    <div>
+      <Modal
+        show={currentProduct}
+        onHide={handleClose}
+        closeTimeoutMS={300}
+        isOpen={Boolean(currentProduct)}
+        onRequestClose={() => setProduct(null)}
+        size="lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title dangerouslySetInnerHTML={{ __html: currentTitle }} />
+        </Modal.Header>
+        <Modal.Body>
+          <iframe
+            width="100%"
+            height="400"
+            src={currentUrl}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen="allowfullscreen"
+          ></iframe>
+        </Modal.Body>
+      </Modal>
+      <Container style={{ background: "#dee2e6" }} fluid>
         <Container>
-        <Row className="pt-5">
-            {
-              movies.map((post, index) => {
-                return (
-<Col sm={4} className="p-3" key={index}>                
-<Card className="webinar_post">
-{post['_embedded']['wp:featuredmedia'][0]['source_url'] && (
-  <Image
-  src={post['_embedded']['wp:featuredmedia'][0]['source_url']}
-  alt={post['title']['rendered']}
-  className="img-hover webimg img-fluid"
-  width={500}
-  height={500}
-  onClick={() => {
-    setProduct(post.id);
-    setUrl(post.acf.video_url);
-    setTitle(post.title.rendered);
-  }}
-/>
-)}
+          <Row className="pt-5">
+            {movies.map((post, index) => {
+              return (
+                <Col sm={4} className="p-3" key={index}>
+                  <Card className="webinar_post">
+                    {post["_embedded"]["wp:featuredmedia"][0]["source_url"] && (
+                      <Image
+                        src={
+                          post["_embedded"]["wp:featuredmedia"][0]["source_url"]
+                        }
+                        alt={post["title"]["rendered"]}
+                        className="img-hover webimg img-fluid"
+                        width={500}
+                        height={500}
+                        onClick={() => {
+                          setProduct(post.id);
+                          setUrl(post.acf.video_url);
+                          setTitle(post.title.rendered);
+                        }}
+                      />
+                    )}
 
-                      
-<Card.Body>
-                            <Card.Title className="fs-3 bogle-medium walmart-default" style={{ minHeight: 110 }} dangerouslySetInnerHTML={{ __html: post['title']['rendered'] }} />
-                            <div dangerouslySetInnerHTML={{ __html: post['acf']['short_decription'] }} style={{ minHeight: 180 }} />
-                            <div style={{ minHeight: 190 }}>
-                              <Button variant="primary" className="pri-category mb-3" >{post['acf']['category']}</Button>
-                              <h3 className="fs-5 bogle-medium mb-1">{post['acf']['expert_name']}</h3>
-                              <h3 className="fs-6 mb-3">{post['acf']['expert_designation']}</h3>
-                              <h3 className="fs-5 bogle-medium mb-1 ">{post['acf']['expert_name_copy']}</h3>
-                              <h3 className="fs-6 mb-3 ">{post['acf']['expert_designation_copy']}</h3>
-                            </div >
-                          </Card.Body>
-                    </Card>        
-                        
-                
-              </Col>
-              )
-
-
+                    <Card.Body>
+                      <Card.Title
+                        className="fs-3 bogle-medium walmart-default"
+                        style={{ minHeight: 110 }}
+                        dangerouslySetInnerHTML={{
+                          __html: post["title"]["rendered"],
+                        }}
+                      />
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: post["acf"]["short_decription"],
+                        }}
+                        style={{ minHeight: 180 }}
+                      />
+                      <div style={{ minHeight: 190 }}>
+                        <Button variant="primary" className="pri-category mb-3">
+                          {post["acf"]["category"]}
+                        </Button>
+                        <h3 className="fs-5 bogle-medium mb-1">
+                          {post["acf"]["expert_name"]}
+                        </h3>
+                        <h3 className="fs-6 mb-3">
+                          {post["acf"]["expert_designation"]}
+                        </h3>
+                        <h3 className="fs-5 bogle-medium mb-1 ">
+                          {post["acf"]["expert_name_copy"]}
+                        </h3>
+                        <h3 className="fs-6 mb-3 ">
+                          {post["acf"]["expert_designation_copy"]}
+                        </h3>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
             })}
           </Row>
         </Container>
       </Container>
-      <section className="section text-center mb-3 pb-5" style={{ background: '#dee2e6' }} fluid>
+      <section
+        className="section text-center mb-3 pb-5"
+        style={{ background: "#dee2e6" }}
+        fluid
+      >
         {loading ? (
-        <RotatingLines
-        visible={true}
-        height="30"
-        width="30"
-        color="#fff"
-        strokeWidth="5"
-        animationDuration="0.75"
-        ariaLabel="rotating-lines-loading"
-        wrapperStyle={{}}
-        strokeColor="green"
-        wrapperClass=""/>
-
+          <RotatingLines
+            visible={true}
+            height="30"
+            width="30"
+            color="#fff"
+            strokeWidth="5"
+            animationDuration="0.75"
+            ariaLabel="rotating-lines-loading"
+            wrapperStyle={{}}
+            strokeColor="green"
+            wrapperClass=""
+          />
         ) : (
           <div className="loadmodediv">
-          {end ? (<p>No more posts to load</p>) : (<Button variant="primary" className="authors_btn fs-5" onClick={loadMore}  >Load more</Button>
-                    )}</div> )}
+            {end ? (
+              <p>No more posts to load</p>
+            ) : (
+              <Button
+                variant="primary"
+                className="authors_btn fs-5"
+                onClick={loadMore}
+              >
+                Load more
+              </Button>
+            )}
+          </div>
+        )}
       </section>
-
-
-
     </div>
   );
 };
