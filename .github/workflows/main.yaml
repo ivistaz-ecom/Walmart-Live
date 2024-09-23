@@ -19,11 +19,9 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }} # Your server's SSH passphrase
 
           script: |
-            echo ${{ secrets.PASSWORD }} | sudo -S su
             cd /home/react/wv-react
             echo ${{ secrets.PASSWORD }} | sudo -S git config --global --add safe.directory /home/react/wv-react
-            echo ${{ secrets.PASSWORD }} | sudo -S git pull origin main
-            # echo ${{ secrets.PASSWORD }} | sudo -S rm -r node_modules/
-            echo ${{ secrets.PASSWORD }} | sudo -S npm install
-            echo ${{ secrets.PASSWORD }} | sudo -S npm run build
+            git pull origin main
+            npm install
+            npm run build
             echo ${{ secrets.PASSWORD }} | sudo -S pm2 restart 0
