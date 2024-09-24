@@ -40,7 +40,7 @@ const FetchSuccessVideos = () => {
 
       // server end
       const [moviesResponse, categoriesResponse] = await Promise.all([
-        fetch(`${configData.SERVER_URL}posts?_embed&categories[]=128&production[]=${configData.SERVER}&status[]=publish&per_page=${page}`),
+        fetch(`${configData.SERVER_URL}posts?_embed&categories[]=128&production[]=${server}&status[]=publish&per_page=${page}`),
         fetch(`${configData.SERVER_URL}categories/128`)
       ]);
 

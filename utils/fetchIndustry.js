@@ -47,7 +47,7 @@ const SuccessStories = () => {
 
       const [moviesResponse, categoriesResponse] = await Promise.all([
         fetch(
-          `${configData.SERVER_URL}industry_connect?_embed&status=publish&production[]=${configData.SERVER}&per_page=${page}`
+          `${configData.SERVER_URL}industry_connect?_embed&status=publish&production[]=${server}&per_page=${page}`
         ),
         fetch(`${configData.SERVER_URL}categories/13`),
       ]);

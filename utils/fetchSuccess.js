@@ -38,7 +38,7 @@ const SuccessStories = () => {
       // server end
 
       const [moviesResponse, categoriesResponse] = await Promise.all([
-        fetch(`${configData.SERVER_URL}posts?_embed&categories[]=12&&production[]=${configData.SERVER}&status[]=publish&per_page=${page}`),
+        fetch(`${configData.SERVER_URL}posts?_embed&categories[]=12&&production[]=${server}&status[]=publish&per_page=${page}`),
         fetch(`${configData.SERVER_URL}categories/12`)
       ]);
 
