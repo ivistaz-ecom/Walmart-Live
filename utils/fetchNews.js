@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Card, Button, Col, Row, Container, Image } from 'react-bootstrap';
-import Link from 'next/link'
+import Link from 'next/link';
 import configData from "../config.json";
 import { usePathname } from 'next/navigation'
 import debounce from 'lodash.debounce';
@@ -16,7 +16,7 @@ const SuccessStories = () => {
   const [total, setTotal] = useState(0);
   const [end, setEnd] = useState(false);
   
-    const domain = typeof window !== 'undefined' ? window.location.hostname : '';
+   const domain = typeof window !== 'undefined' ? window.location.hostname : '';
 
   const fetchContent = async () => {
     try {

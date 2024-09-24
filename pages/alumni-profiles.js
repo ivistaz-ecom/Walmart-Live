@@ -48,7 +48,7 @@ const AlumniProfiles = () => {
   const fetchMovies = async () => {
     setLoading(true);
     const urlPage = `${page}`;
-    const url = `${server}msme_speaks?_embed&production[]=${configData.SERVER}&status[]=publish&per_page=${urlPage}`;
+    const url = `${server}msme_speaks?_embed&production[]=${server}&status[]=publish&per_page=${urlPage}`;
 
     try {
       const response = await fetch(url);
@@ -140,14 +140,14 @@ const AlumniProfiles = () => {
       <Brand />
 
       <Container className="text-center">
-        <h1 className="fs-1 bogle-medium">Walmart Vriddhi Alumni</h1>
+        <h1 className="fs-1 bogle-medium pt-4">Walmart Vriddhi Alumni</h1>
         <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Walmart Vriddhi Alumni" />
         <p className="fs-3">
           Walmart Vriddhi supplier development program has assisted over 25,000 MSMEs in India to help them enhance their domestic capabilities and participate in the global economy.
         </p>
       </Container>
 
-      <Container fluid className='wbg-gy pt-5'>
+      <Container fluid className='wbg-gy pt-4'>
         <Container className="text-center">
           <p className="fs-1 bogle-medium">Meet the Walmart Vriddhi Graduates</p>
           <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Walmart Vriddhi Alumni" />
