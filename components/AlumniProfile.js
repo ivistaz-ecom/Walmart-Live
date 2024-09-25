@@ -31,7 +31,24 @@ const SuccessStories = () => {
 
   const postsPerPage = "9";
   const API_ENDPOINT = `${configData.SERVER_URL}walmart_graduates?_embed&categories[]=27&production[]=${configData.SERVER}&category_type[]=79&search=`;
+  
+  const domain = typeof window !== "undefined" ? window.location.hostname : "";
 
+  // define server
+let server;
+
+if (
+  domain === "walmartvriddhi.org" ||
+  domain === "www.walmartvriddhi.org"
+) {
+  server = `${configData.LIVE_SERVER}`;
+} else if (domain === "staging.walmartvriddhi.org") {
+  server = `${configData.STAG_SERVER}`;
+} else {
+  server = `${configData.STAG_SERVER}`;
+}
+
+// server end
   const NUM_PAGES_DISPLAYED = 5;
 
   const taxonomyName = "staging"; // Replace with your actual taxonomy name
@@ -62,6 +79,7 @@ const SuccessStories = () => {
     let url = `${API_ENDPOINT}${val}&per_page=${postsPerPage}&page=${page}&category_type[]=79`;
 
     try {
+      
       const response = await fetch(url);
       const data = await response.json();
       setMovies(data);
@@ -85,13 +103,7 @@ const SuccessStories = () => {
   }, [page]);
 
   const fetchPosts = async () => {
-    let url = `${
-      configData.SERVER_URL
-    }walmart_graduates?_embed&categories[]=27&production[]=${
-      configData.SERVER
-    }&category_type[]=79&${acfSearch ? `&city=${acfSearch}` : ""}${
-      acfIndustry ? `&industy=${acfIndustry}` : ""
-    }&per_page=${postsPerPage}&page=${page}`;
+    let url = `${configData.SERVER_URL}walmart_graduates?_embed&categories[]=27&production[]=${server}&category_type[]=79&${acfSearch ? `&city=${acfSearch}` : ""}${acfIndustry ? `&industy=${acfIndustry}` : ""}&per_page=${postsPerPage}&page=${page}`;
 
     try {
       const response = await fetch(url);
