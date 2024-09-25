@@ -42,7 +42,7 @@ function AlumniCarousel() {
       //console.log(urlPage)
       //url = query ? `${API_ENDPOINT}${urlPage}${urlQuery}` : "";
       //url = `${configData.SERVER_URL}posts?_embed&categories[]=12&status[]=publish&per_page=${urlPage}`;
-      url = `${configData.SERVER_URL}posts?_embed&categories[]=27&status[]=publish&production[]=${configData.SERVER}&per_page=12`;
+      url = `${configData.SERVER_URL}posts?_embed&categories[]=27&status[]=publish&production[]=${configData.SERVER}&per_page=12`;  
       try {
         const response = await fetch(url);
         const data = await response.json();

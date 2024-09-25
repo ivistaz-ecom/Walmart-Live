@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Container } from "react-bootstrap";
 
 import Header from "../components/Header";
@@ -17,7 +17,7 @@ import NewsLetter from "../components/NewsLetter";
 import Floating from "../components/FloatingMenu";
 import Popups from "../components/PopUps";
 
-const AlumniProfiles = () => {
+const alumniProfiles = () => {
   const pathname = usePathname();
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(10);
@@ -31,69 +31,69 @@ const AlumniProfiles = () => {
   const title =
     "Business Owner Training, Business Owner Training Programs, Sell Products Online in India";
   const desc =
-    "The MSME spotlight and industry connect series is a collection of webinars that define Walmart Vriddhi’s MSME business training programs. Learn more about these webinars here";
+    "The MSME spotlight and industry connect series is a collection of webinars that define Walmart Vriddhi’s MSME business training programs Learn more about these webinars here";
   const banner = "/images/alumni_profile_banner.png";
+  const url = "https://www.walmartvriddhi.org/alumni-profiles/";
 
-  // Define server based on domain
-const domain = typeof window !== "undefined" ? window.location.hostname : "";
-
-let serverEnv;
-if (domain === "walmartvriddhi.org" || domain === "www.walmartvriddhi.org") {
-  serverEnv = `${configData.LIVE_SERVER}`
-} else if (domain === "staging.walmartvriddhi.org") {
-  serverEnv = `${configData.STAG_SERVER}`
-} else {
-  serverEnv = `${configData.STAG_SERVER}` // Or use configData.DEV_SERVER if necessary
-}
-
-let server = serverEnv === `${configData.LIVE_SERVER}` ? configData.LIVE_SERVER : configData.STAG_SERVER;
-
-// Fetch movies function
-const fetchMovies = async () => {
-  try {
+  const fetchMovies = async () => {
     setLoading(true);
-    const url = `${server}/msme_speaks?_embed&production=${serverEnv}&status[]=publish&per_page=${page}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setMovies((prevMovies) => [...prevMovies, ...data]); // Appending new data to existing list
-    setLoading(false);
-  } catch (error) {
-    console.error("Failed to fetch movies:", error);
-    setLoading(false);
-  }
-};
 
-// Fetch next items function
-const fetchNos = async () => {
-  try {
+
+
+    // server end
+
+    // let url = "";
+    const urlPage = `${page}`;
+    // url = `${configData.SERVER_URL}walmart_graduates?_embed&production[]=${server}&status[]=publish&per_page=${urlPage}`; //Staging Enviroment
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      //console.log(data);
+      setMovies(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchNos = async () => {
     setLoading(true);
-    const catUrl = `${server}/categories/12`;
-    const response = await fetch(catUrl);
-    const cats = await response.json();
-    setNext(cats);
-    setLoading(false);
-  } catch (error) {
-    console.error("Failed to fetch categories:", error);
-    setLoading(false);
-  }
-};
+    // let cat = "";
+    // cat = `${configData.SERVER_URL}categories/12`;
 
-// Load more function
-const loadMore = () => {
-  const totalItems = next.count;
-  const perPage = 2;
-  const totalPages = Math.ceil(totalItems / perPage);
-  if (page >= totalPages) {
-    setEnd(false); // Stop loading more if all pages are loaded
-  }
-  setPage((oldPage) => oldPage + perPage); // Increment by 2 as per the original logic
-};
+    try {
+      const response = await fetch(cat);
+      const cats = await response.json();
+      //console.log(cats);
+      setNext(cats);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-useEffect(() => {
-  fetchMovies();
-  fetchNos();
-}, [page]);
+  useEffect(
+    () => {
+      fetchMovies();
+      fetchNos();
+    },
+    [page],
+    [next]
+  );
 
+  const loadMore = () => {
+    setTotal(next.count);
+    //console.log(total)
+    const main = next.count;
+
+    if (total == page) {
+      setEnd(false);
+    }
+
+    setPage((oldPage) => {
+      return oldPage + 2;
+    });
+  };
 
   return (
     <>
@@ -242,4 +242,4 @@ useEffect(() => {
   );
 };
 
-export default AlumniProfiles;
+export default alumniProfiles;
