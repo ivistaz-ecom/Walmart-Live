@@ -29,7 +29,6 @@ export default function App() {
         setOtherSource("");
         SetSelectCountry('IN');
         SetSelectState('KA');
-        // Add any additional state variables that need to be reset
     };
 
 
