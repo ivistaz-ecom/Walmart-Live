@@ -125,8 +125,8 @@ const SuccessStories = () => {
   return (
     <div>
       <NextSeo
-        noindex={true}
-        nofollow={true}
+        noindex={false}
+        nofollow={false}
         title={title}
         description={desc}
         canonical={pathname}

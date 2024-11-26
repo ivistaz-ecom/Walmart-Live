@@ -3,5 +3,6 @@
   "SERVER_FROM": "https://docs.walmartvriddhi.org/wp-json/",
   "SERVER": "78",
   "LIVE_SERVER": "77",
-  "STAG_SERVER": "78"
+  "STAG_SERVER": "78",
+  "WEBSITE_URL" : "https://walmartvriddhi.org"
 }

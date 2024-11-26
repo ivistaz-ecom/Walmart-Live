@@ -10,14 +10,33 @@ import NewsLetter from '../../components/NewsLetter'
 import Floating from '../../components/FloatingMenu'
 import Popups from '../../components/PopUps'
 import Head from 'next/head';
+import { usePathname } from 'next/navigation';
 
 const post = ({ data }) => {
   //   console.log(data);
+  const pathname = usePathname();
+  const url = `${configData.WEBSITE_URL}${pathname}`;
+  const structuredData = {
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    "name": "walmartvriddhi",
+    "url": "https://walmartvriddhi.org/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${url}{search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
   return (
     <div>
-      <Head>
-      <link rel="icon" href="/images/favicon.ico" />
-      </Head>
+     
+        <Head>
+        <link rel="icon" href="/images/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        </Head>
 
       <Header />
       <div className='grid grid-cols-3 gap-5 w-full'>
@@ -40,9 +59,9 @@ const post = ({ data }) => {
                   nofollow={false}
                   title={post['title']['rendered']}
                   description={string}
-                  canonical="https://www.canonical.ie/"
+                  canonical={`${configData.WEBSITE_URL}${pathname}`}
                   openGraph={{
-                    url: 'https://www.url.ie/a',
+                    url: '',
                     title: post['title']['rendered'],
                     description: string,
                     images: [
@@ -72,7 +91,7 @@ const post = ({ data }) => {
                   }}
                 />
                 <Container fluid key={post.id} className="success_post d-flex align-items-end wbg-main" style={{ backgroundImage: `url(${post['acf']['inside_banner']})`, backgroundSize: 'contain' }}>
-                  <Container className="py-4 wbg-main">
+                  <Container className="py-4">
                     <h1 className="text-white fs-2" dangerouslySetInnerHTML={{ __html: post['title']['rendered'] }}></h1>
                   </Container>
                 </Container>

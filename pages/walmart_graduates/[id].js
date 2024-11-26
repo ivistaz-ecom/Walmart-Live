@@ -26,12 +26,31 @@ import {
     WhatsappIcon,
 } from 'next-share'
 import { TbShare } from "react-icons/tb";  
+import Head from 'next/head';
 
 const post = ({ data }) => {
   const pathname = usePathname()
+  const url = `${configData.WEBSITE_URL}${pathname}`;
+  const structuredData = {
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    "name": "walmartvriddhi",
+    "url": "https://walmartvriddhi.org/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${url}{search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
   console.log(data);
   return (
     <div>
+      <Head>
+    <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+    </Head>
           <Header />   
 
 <div className='grid grid-cols-3 gap-5 w-full'>
@@ -43,12 +62,12 @@ return (
       noindex={false}
       nofollow={false}
       title={post['title']['rendered']}
-      description=''
-      canonical={pathname}
+      description={post['acf']['description_2']}
+      canonical={`${configData.WEBSITE_URL}${pathname}`}
       openGraph={{
         url: pathname,
         title: post['title']['rendered'],
-        description: '',
+        description: ['description_2']['rendered'],
         images: [
           {
             url: post['_embedded']['wp:featuredmedia'][0]['source_url'],
@@ -75,6 +94,7 @@ return (
         cardType: 'summary_large_image',
       }}
     />
+    
 <Container fluid className="wbg-main yellow-border">
 <Container>
                 <Row>
