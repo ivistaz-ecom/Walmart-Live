@@ -12,14 +12,32 @@ import Floating from '../../components/FloatingMenu'
 import Popups from '../../components/PopUps'
 import Head from 'next/head';
 import { decode } from 'html-entities';
+import ConfigData from "../../config.json"
 
 const post = ({ data }) => {
   const pathname = usePathname()
+
+  const url = `${ConfigData.WEBSITE_URL}${pathname}`;
+  const structuredData = {
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    "name": "walmartvriddhi",
+    "url": "https://walmartvriddhi.org/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${url}{search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
   //console.log(data);
   return (
     <div>
       <Head>
       <link rel="icon" href="/images/favicon.ico" />
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </Head>
       <Header />
 
@@ -28,14 +46,14 @@ const post = ({ data }) => {
           data.map((post) => {
 
             const [string, setString] = useState(
-              post['acf']['descheading-2']
+              post.acf.meta_description
             );
             useEffect(() => {
               const regex = /(<([^>]+)>)/gi;
               const newString = string.replace(regex, "");
               setString(newString);
             }, []);
-            const decodedTitle = decode(post['title']['rendered']);
+            const decodedTitle = decode(post.acf.meta_title);
             return (
               <>
                <NextSeo
@@ -43,7 +61,7 @@ const post = ({ data }) => {
   follow={true}
   title={decodedTitle}
   description={string}
-  canonical=''
+  canonical={`${ConfigData.WEBSITE_URL}${pathname}`}
   openGraph={{
     url: '',
     title: decodedTitle,

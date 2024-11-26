@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import debounce from "lodash.debounce";
 import { RotatingLines } from "react-loader-spinner";
 import date from "date-and-time";
+import Head from "next/head";
 
 const SuccessStories = () => {
   const pathname = usePathname();
@@ -17,7 +18,18 @@ const SuccessStories = () => {
   const [end, setEnd] = useState(false);
 
   const domain = typeof window !== "undefined" ? window.location.hostname : "";
-
+  const url = `${configData.WEBSITE_URL}${pathname}`;
+  const structuredData = {
+    "@context": "https://schema.org/",
+    "@type": "WebSite",
+    "name": "walmartvriddhi",
+    "url":`${configData.WEBSITE_URL}`,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${url}{search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
   const fetchContent = async () => {
     try {
       // define server
@@ -85,7 +97,15 @@ const SuccessStories = () => {
   };
 
   return (
+    
     <div>
+      <Head>
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <link rel="canonical" href={`https://walmartvriddhi.org${pathname}`} />
+      </Head>
       <Container style={{ background: "#dee2e6" }} fluid>
         <Container>
           <Row className="pt-5">
