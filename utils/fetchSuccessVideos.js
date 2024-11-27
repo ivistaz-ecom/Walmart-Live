@@ -1,12 +1,11 @@
-'use client'
+"use client";
 import React, { useEffect, useState, useCallback } from "react";
-import { Card, Col, Row, Container, Modal } from 'react-bootstrap';
+import { Card, Col, Row, Container, Modal } from "react-bootstrap";
 import configData from "../config.json";
-import { usePathname } from 'next/navigation';
-import debounce from 'lodash.debounce';
+import { usePathname } from "next/navigation";
+import debounce from "lodash.debounce";
 import Aos from "aos";
 import { IoIosCloseCircle } from "react-icons/io";
-
 
 const FetchSuccessVideos = () => {
   const pathname = usePathname();
@@ -18,36 +17,39 @@ const FetchSuccessVideos = () => {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const domain = typeof window !== 'undefined' ? window.location.hostname : '';
+  const domain = typeof window !== "undefined" ? window.location.hostname : "";
 
   const fetchContent = useCallback(async () => {
     setLoading(true);
     try {
-
       // define server
-      let server
-  
+      let server;
+
       if (
-        domain === 'walmartvriddhi.org' ||
-        domain === 'www.walmartvriddhi.org'
+        domain === "walmartvriddhi.org" ||
+        domain === "www.walmartvriddhi.org"
       ) {
-        server = `${configData.LIVE_SERVER}`
-      } else if (domain === 'staging.walmartvriddhi.org') {
-        server = `${configData.STAG_SERVER}`
+        server = `${configData.LIVE_SERVER}`;
+      } else if (domain === "staging.walmartvriddhi.org") {
+        server = `${configData.STAG_SERVER}`;
       } else {
-          server = `${configData.STAG_SERVER}`
+        server = `${configData.STAG_SERVER}`;
       }
 
       // server end
       const [moviesResponse, categoriesResponse] = await Promise.all([
-        fetch(`${configData.SERVER_URL}posts?_embed&categories[]=128&production[]=${server}&status[]=publish&per_page=${page}`),
-        fetch(`${configData.SERVER_URL}categories/128`)
+        fetch(
+          `${configData.SERVER_URL}posts?_embed&categories[]=128&production[]=${server}&status[]=publish&per_page=${page}`
+        ),
+        fetch(`${configData.SERVER_URL}categories/128`),
       ]);
 
       const moviesData = await moviesResponse.json();
       const categoriesData = await categoriesResponse.json();
 
-      const sortedMoviesData = moviesData.sort((a, b) => new Date(a.date) - new Date(b.date));
+      const sortedMoviesData = moviesData.sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
 
       if (moviesData.length === 0) {
         setEnd(true);
@@ -61,7 +63,9 @@ const FetchSuccessVideos = () => {
     setLoading(false);
   }, [page]);
 
-  const debouncedFetchContent = useCallback(debounce(fetchContent, 500), [fetchContent]);
+  const debouncedFetchContent = useCallback(debounce(fetchContent, 500), [
+    fetchContent,
+  ]);
 
   useEffect(() => {
     fetchContent();
@@ -85,7 +89,7 @@ const FetchSuccessVideos = () => {
     const iframe = document.querySelector("iframe");
     const videoSrc = iframe.src;
 
-    iframe.src = ''; // Empty the src to stop the video
+    iframe.src = ""; // Empty the src to stop the video
     iframe.src = videoSrc; // Re-assign to play again (toggles play/pause)
   };
 
@@ -93,7 +97,7 @@ const FetchSuccessVideos = () => {
     Aos.init({
       delay: 0,
       duration: 400,
-      easing: 'ease',
+      easing: "ease",
     });
   }, []);
 
@@ -153,22 +157,24 @@ const FetchSuccessVideos = () => {
               <div className="position-relative">
                 <Card.Img
                   className="p-3 position-relative"
-                  src={item._embedded['wp:featuredmedia'][0].source_url}
+                  src={item._embedded["wp:featuredmedia"][0].source_url}
                   alt={item.title.rendered}
                   onClick={() => handleThumbnailClick(item.acf.video_link)}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 />
                 <img
                   src="/images/success/icon-video.svg"
                   className="position-absolute top-50 start-50 translate-middle"
                   alt="video icon"
                   onClick={() => handleThumbnailClick(item.acf.video_link)}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 />
               </div>
               <Card.Body>
                 <Card.Title className="text-center">
-                  {item.title.rendered}
+                  <div
+                    dangerouslySetInnerHTML={{ __html: item.title.rendered }}
+                  ></div>
                 </Card.Title>
               </Card.Body>
             </Card>
@@ -177,22 +183,33 @@ const FetchSuccessVideos = () => {
       </Row>
       {!end && movies.length >= 10 && (
         <div className="text-center my-4">
-          <button className="btn btn-primary" onClick={loadMore} disabled={loading}>
-            {loading ? 'Loading...' : 'Load More'}
+          <button
+            className="btn btn-primary"
+            onClick={loadMore}
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Load More"}
           </button>
         </div>
       )}
 
       {/* Modal for playing the video */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered size="lg">
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        centered
+        size="lg"
+      >
         <Modal.Body className="text-center p-0 position-relative">
-          <button className="close-button" onClick={() => setShowModal(false)}><IoIosCloseCircle /></button>
+          <button className="close-button" onClick={() => setShowModal(false)}>
+            <IoIosCloseCircle />
+          </button>
           <div
             onClick={handleVideoClick}
             style={{
-              position: 'relative',
-              cursor: 'pointer',
-              backgroundColor: 'transparent',
+              position: "relative",
+              cursor: "pointer",
+              backgroundColor: "transparent",
             }}
           >
             <iframe
