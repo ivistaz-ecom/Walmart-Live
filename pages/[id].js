@@ -35,7 +35,7 @@ const post = ({ data }) => {
           <link rel="canonical" href={`https://walmartvriddhi.org${pathname}`} />
           <meta name="keywords" content={post.acf.keywords} />
           <meta name="robots" content="index, follow" />
-          <div dangerouslySetInnerHTML={{ __html: post.acf.meta_robots }} />
+          {/* <div dangerouslySetInnerHTML={{ __html: post.acf.meta_robots }} /> */}
           <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
