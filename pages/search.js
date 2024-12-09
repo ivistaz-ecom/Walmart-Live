@@ -105,7 +105,7 @@ const SearchResults = () => {
                   </Col>
 
                   <Col lg={3} className="d-flex justify-content-center align-items-center">
-                    <Link href={`/${post['slug']}`} className="search-text text-center text-lg-start p-3 p-lg-0" target="_blank">
+                    <Link href={`${type}/${post['slug']}`}className="search-text text-center text-lg-start p-3 p-lg-0" target="_blank">
                       <span className="fs-5" dangerouslySetInnerHTML={{ __html: post['title']['rendered'] }} />
                     </Link>
                   </Col>

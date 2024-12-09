@@ -5,7 +5,7 @@ function Summit2024() {
   return (
     <>
 <Container className='text-center'>
-        <h1 className='fs-2 bogle-medium mt-5'>Walmart Vriddhi MSME Summit 2024</h1>
+        <h1 className='fs-1 bogle-medium mt-5'>Walmart Vriddhi MSME Summit 2024</h1>
         <Image
               src='/images/line-svg-png-1.png'
               alt='walmart vriddhi'

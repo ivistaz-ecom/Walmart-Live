@@ -194,7 +194,7 @@ const SuccessStories = () => {
             </div>
             <div className="tab-item" data-aos="fade-left">
               <Image src="/images/success/stories-icon.svg" alt="msme training Program online" className="img mt-2" width={50} height={50} />
-              <span className="eael-tab-title bogle-medium walmart-default mt-2">Video Stories</span>
+              <span className="eael-tab-title bogle-medium walmart-default mt-2">Videos</span>
             </div>
             <div className="line"></div>
           </div>
