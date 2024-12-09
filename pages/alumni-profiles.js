@@ -197,7 +197,7 @@ const alumniProfiles = () => {
           height={20}
           alt="Walmart Vriddhi Alumni"
         />
-        <p className="fs-4">
+        <p className="fs-3">
           Hear from our graduates about their experience of the Walmart Vriddhi
           program and how it benefitted them.
         </p>
