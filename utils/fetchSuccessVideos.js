@@ -10,7 +10,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 const FetchSuccessVideos = () => {
   const pathname = usePathname();
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(10);
+  const [page, setPage] = useState(20);
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
   const [end, setEnd] = useState(false);
@@ -71,14 +71,6 @@ const FetchSuccessVideos = () => {
     fetchContent();
     debouncedFetchContent();
   }, [page, debouncedFetchContent]);
-
-  const loadMore = () => {
-    if (page >= total) {
-      setEnd(true);
-      return;
-    }
-    setPage((oldPage) => oldPage + 4);
-  };
 
   const handleThumbnailClick = (videoLink) => {
     setCurrentVideo(videoLink);
@@ -181,17 +173,6 @@ const FetchSuccessVideos = () => {
           </Col>
         ))}
       </Row>
-      {!end && movies.length >= 10 && (
-        <div className="text-center my-4">
-          <button
-            className="btn btn-primary"
-            onClick={loadMore}
-            disabled={loading}
-          >
-            {loading ? "Loading..." : "Load More"}
-          </button>
-        </div>
-      )}
 
       {/* Modal for playing the video */}
       <Modal
