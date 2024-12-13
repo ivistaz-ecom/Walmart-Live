@@ -2362,8 +2362,16 @@ border-radius: 25px !important;
     border-left: 15px solid #fffdfd;
 }
 
-.carousel-item {
+/* Add this to your custom CSS */
+.pagination-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+  }
   
-    /* padding: 20px; */
+  .pagination-container .btn-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
   }
   

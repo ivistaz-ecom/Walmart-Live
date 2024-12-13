@@ -34,56 +34,51 @@ const SuccessStories = () => {
   // define server
   let server;
 
-  if (
-    domain === "walmartvriddhi.org" ||
-    domain === "www.walmartvriddhi.org"
-  ) {
+  if (domain === "walmartvriddhi.org" || domain === "www.walmartvriddhi.org") {
     server = `${configData.LIVE_SERVER}`;
   } else if (domain === "staging.walmartvriddhi.org") {
     server = `${configData.STAG_SERVER}`;
   } else {
     server = `${configData.STAG_SERVER}`;
-  }  
+  }
 
   const postsPerPage = "9";
   const API_ENDPOINT = `${configData.SERVER_URL}walmart_graduates?_embed&categories[]=27&production[]=${server}&category_type[]=79&search=`;
-  
 
-
-// server end
+  // server end
   // const NUM_PAGES_DISPLAYED = 5;
 
-  // const taxonomyName = "staging"; 
+  // const taxonomyName = "staging";
   //const taxonomyUrl = `${configData.SERVER_URL}category_type/79`;
   const taxonomyUrl = `${configData.SERVER_FROM}custom/v1/category_type_post_count/?category_type=79&production=${server}`;
-const fetchTaxonomyCount = async () => {
-  try {
-    const response = await fetch(taxonomyUrl);
-    const data = await response.json();
+  const fetchTaxonomyCount = async () => {
+    try {
+      const response = await fetch(taxonomyUrl);
+      const data = await response.json();
 
-    if (response.ok) {
-      const termCount = data.count;
-      console.log(termCount)
-      
-      // Round up the total number of pages
-      const pages = Math.ceil(termCount / postsPerPage);
-      
-      console.log(pages);
-      setTotalPages(pages);
-    } else {
-      console.error(`Failed to fetch taxonomy information. Status: ${response.status}`);
+      if (response.ok) {
+        const termCount = data.count;
+        console.log(termCount);
+
+        // Round up the total number of pages
+        const pages = Math.ceil(termCount / postsPerPage);
+
+        console.log(pages);
+        setTotalPages(pages);
+      } else {
+        console.error(
+          `Failed to fetch taxonomy information. Status: ${response.status}`
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching taxonomy information:", error);
     }
-  } catch (error) {
-    console.error("Error fetching taxonomy information:", error);
-  }
-};
-
+  };
 
   const fetchMovies = async () => {
     let url = `${API_ENDPOINT}${val}&per_page=${postsPerPage}&page=${page}&category_type[]=79`;
 
     try {
-      
       const response = await fetch(url);
       const data = await response.json();
       setMovies(data);
@@ -107,7 +102,13 @@ const fetchTaxonomyCount = async () => {
   }, [page]);
 
   const fetchPosts = async () => {
-    let url = `${configData.SERVER_URL}walmart_graduates?_embed&categories[]=27&production[]=${server}&category_type[]=79&${acfSearch ? `&city=${acfSearch}` : ""}${acfIndustry ? `&industy=${acfIndustry}` : ""}&per_page=${postsPerPage}&page=${page}`;
+    let url = `${
+      configData.SERVER_URL
+    }walmart_graduates?_embed&categories[]=27&production[]=${server}&category_type[]=79&${
+      acfSearch ? `&city=${acfSearch}` : ""
+    }${
+      acfIndustry ? `&industy=${acfIndustry}` : ""
+    }&per_page=${postsPerPage}&page=${page}`;
 
     try {
       const response = await fetch(url);
@@ -385,7 +386,7 @@ const fetchTaxonomyCount = async () => {
           <Container>No profile found</Container>
         ) : (
           <>
-            <div className="d-flex justify-content-center mt-3">
+            <div className="pagination-container d-flex justify-content-center mt-5 align-items-center flex-row">
               <div
                 className="btn-group"
                 role="group"
