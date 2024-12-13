@@ -1,25 +1,24 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Card, Button, Col, Row, Container } from 'react-bootstrap';
-import Link from 'next/link'
-import Header from '../components/Header';
-import Brand from '../components/BrandLogo';
-import Footer from '../components/Footer';
+import { Card, Button, Col, Row, Container } from "react-bootstrap";
+import Link from "next/link";
+import Header from "../components/Header";
+import Brand from "../components/BrandLogo";
+import Footer from "../components/Footer";
 import configData from "../config.json";
-import { NextSeo } from 'next-seo';
-import { usePathname } from 'next/navigation'
-import debounce from 'lodash.debounce';
+import { NextSeo } from "next-seo";
+import { usePathname } from "next/navigation";
+import debounce from "lodash.debounce";
 import ClockLoader from "react-spinners/ClockLoader";
-import Success from '../utils/fetchSuccess'
-import NewsLetter from '../components/NewsLetter'
-import Floating from '../components/FloatingMenu'
-import Popups from '../components/PopUps'
-import Image from 'next/image'
+import Success from "../utils/fetchSuccess";
+import NewsLetter from "../components/NewsLetter";
+import Floating from "../components/FloatingMenu";
+import Popups from "../components/PopUps";
+import Image from "next/image";
 import SuccessVideos from "../utils/fetchSuccessVideos";
 import Aos from "aos";
 
-
 const SuccessStories = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(10);
   const [loading, setLoading] = useState(false);
@@ -28,10 +27,12 @@ const SuccessStories = () => {
   const [total, setTotal] = useState(0);
   const [end, setEnd] = useState(false);
 
-  const title = "Business Owner Training, Business Owner Training Programs, Sell Products Online in India";
-  const desc = "The MSME spotlight and industry connect series is a collection of webinars that define Walmart Vriddhi’s MSME business training programs Learn more about these webinars here";
-  const banner = '/images/Success-stories-page-banner-V2.png';
-  const url = 'https://www.walmartvriddhi.org/success-stories/';
+  const title =
+    "Business Owner Training, Business Owner Training Programs, Sell Products Online in India";
+  const desc =
+    "The MSME spotlight and industry connect series is a collection of webinars that define Walmart Vriddhi’s MSME business training programs Learn more about these webinars here";
+  const banner = "/images/Success-stories-page-banner-V2.png";
+  const url = "https://www.walmartvriddhi.org/success-stories/";
 
   const fetchMovies = async () => {
     setLoading(true);
@@ -72,7 +73,6 @@ const SuccessStories = () => {
     fetchNos();
     debouncedFetchMovies();
   }, [page, debouncedFetchMovies]);
-
 
   const loadMore = () => {
     // console.log(page)
@@ -117,10 +117,7 @@ const SuccessStories = () => {
         pane.classList.add("active");
       };
     });
-
   }, []);
-
-
 
   return (
     <div>
@@ -139,15 +136,15 @@ const SuccessStories = () => {
               url: banner,
               width: 800,
               height: 600,
-              alt: 'Walmart Vridhi',
-              type: 'image/jpeg',
+              alt: "Walmart Vridhi",
+              type: "image/jpeg",
             },
             {
               url: banner,
               width: 900,
               height: 800,
-              alt: 'Walmart Vridhi',
-              type: 'image/jpeg',
+              alt: "Walmart Vridhi",
+              type: "image/jpeg",
             },
             { url: banner },
             { url: banner },
@@ -155,22 +152,39 @@ const SuccessStories = () => {
           siteName: title,
         }}
         twitter={{
-          handle: '@handle',
-          site: '@site',
-          cardType: 'summary_large_image',
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
         }}
       />
       <Header />
-      <Image
-        src={banner}
-        width="800"
-        height="620"
-        background='no-repeat'
-        background-size='cover'
-        className="banner-img w-100 h-auto"
-        alt="walmart vriddhi"
+      <div>
+        {/* Desktop Banner */}
+        <Row className="d-none d-md-block">
+          <Col className="p-0">
+            <Image
+              src={banner}
+              width="900"
+              height="620"
+              style={{ background: "no-repeat", backgroundSize: "cover" }}
+              className="banner-img w-100 h-auto"
+            />
+          </Col>
+        </Row>
 
-      />
+        {/* Mobile Banner */}
+        <Row className="d-block d-md-none">
+          <Col className="p-0">
+            <Image
+              src="/images/Success-Stories-page-banner-mob-version.png"
+              width="800"
+              height="620"
+              style={{ background: "no-repeat", backgroundSize: "cover" }}
+              className="banner-img w-100 h-auto p-0"
+            />
+          </Col>
+        </Row>
+      </div>
       <Brand />
       {/* <Container className="text-center wbg-light-gy">
         <p className="fs-1 bogle-medium walmart-default" >MSME Success Stories</p>
@@ -183,29 +197,57 @@ const SuccessStories = () => {
       <Floating />
       <Container fluid className="wbg-main p-0 overflow-hidden">
         <Container className="text-center">
-          <p className="fs-2 bogle-medium text-white pt-3" >Inspiring Journeys of Walmart Vriddhi MSMEs</p>
-          <Image src="/images/line-svg-png-1.png" width={100} height={20} alt="Industry Connect Series" />
+          <p className="fs-2 bogle-medium text-white pt-3">
+            Inspiring Journeys of Walmart Vriddhi MSMEs
+          </p>
+          <Image
+            src="/images/line-svg-png-1.png"
+            width={100}
+            height={20}
+            alt="Industry Connect Series"
+          />
         </Container>
         <Container>
           <div className="tabs">
             <div className="tab-item active" data-aos="fade-right">
-              <Image src="/images/success/time-svg.svg" alt="msme training Program online" className="img mt-2" width={50} height={50} />
-              <span className="eael-tab-title bogle-medium walmart-default mt-2">Impact Narratives</span>
+              <Image
+                src="/images/success/time-svg.svg"
+                alt="msme training Program online"
+                className="img mt-2"
+                width={50}
+                height={50}
+              />
+              <span className="eael-tab-title bogle-medium walmart-default mt-2">
+                Impact Narratives
+              </span>
             </div>
             <div className="tab-item" data-aos="fade-left">
-              <Image src="/images/success/stories-icon.svg" alt="msme training Program online" className="img mt-2" width={50} height={50} />
-              <span className="eael-tab-title bogle-medium walmart-default mt-2">Videos</span>
+              <Image
+                src="/images/success/stories-icon.svg"
+                alt="msme training Program online"
+                className="img mt-2"
+                width={50}
+                height={50}
+              />
+              <span className="eael-tab-title bogle-medium walmart-default mt-2">
+                Videos
+              </span>
             </div>
             <div className="line"></div>
           </div>
         </Container>
-        <Container fluid className='overflow-hidden' style={{ background: '#ffff' }} data-aos="fade-up">
+        <Container
+          fluid
+          className="overflow-hidden"
+          style={{ background: "#ffff" }}
+          data-aos="fade-up"
+        >
           <div className="tab-content">
-            <div className="tab-pane active" >
+            <div className="tab-pane active">
               <Success />
             </div>
             {/* 2nd tab starts here  */}
-            <div className="tab-pane" >
+            <div className="tab-pane">
               <SuccessVideos />
             </div>
           </div>
@@ -213,8 +255,6 @@ const SuccessStories = () => {
       </Container>
       <NewsLetter />
       <Footer />
-
-
     </div>
   );
 };

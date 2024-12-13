@@ -1,5 +1,5 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 import Header from "../components/Header";
 import Brand from "../components/BrandLogo";
@@ -37,8 +37,6 @@ const alumniProfiles = () => {
 
   const fetchMovies = async () => {
     setLoading(true);
-
-
 
     // server end
 
@@ -134,14 +132,35 @@ const alumniProfiles = () => {
         }}
       />
       <Header />
-      <Image
-        src={banner}
-        width="900"
-        height="620"
-        background="no-repeat"
-        background-size="cover"
-        className="banner-img w-100 h-auto"
-      />
+
+      <div>
+        {/* Desktop Banner */}
+        <Row className="d-none d-md-block">
+          <Col className="p-0">
+            <Image
+              src={banner}
+              width="900"
+              height="620"
+              style={{ background: "no-repeat", backgroundSize: "cover" }}
+              className="banner-img w-100 h-auto"
+            />
+          </Col>
+        </Row>
+
+        {/* Mobile Banner */}
+        <Row className="d-block d-md-none">
+          <Col className="p-0">
+            <Image
+              src="/images/Alumni-page banner-mob-version.png"
+              width="900"
+              height="620"
+              style={{ background: "no-repeat", backgroundSize: "cover" }}
+              className="banner-img w-100 h-auto"
+            />
+          </Col>
+        </Row>
+      </div>
+
       <Brand />
       <Container className="text-center">
         <p className="fs-1 bogle-medium ">Walmart Vriddhi Alumni</p>
