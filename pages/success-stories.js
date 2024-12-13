@@ -30,7 +30,7 @@ const SuccessStories = () => {
 
   const title = "Business Owner Training, Business Owner Training Programs, Sell Products Online in India";
   const desc = "The MSME spotlight and industry connect series is a collection of webinars that define Walmart Vriddhi’s MSME business training programs Learn more about these webinars here";
-  const banner = '/images/success_banner.jpeg';
+  const banner = '/images/Success-stories-page-banner-V2.png';
   const url = 'https://www.walmartvriddhi.org/success-stories/';
 
   const fetchMovies = async () => {
