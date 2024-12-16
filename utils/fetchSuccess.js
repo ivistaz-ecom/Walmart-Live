@@ -88,8 +88,8 @@ movies.map((post, index) => {
   //console.log(post);
   return (
 <>
-<Col sm={6} className="p-3" key={post.id}>
-<Card className="story_post" >
+<Col sm={6} className="p-lg-3 p-0" key={post.id}>
+<Card className="story_post mb-4" >
 {post['_embedded']['wp:featuredmedia'][0]['source_url'] && (
 <Image
 src={post['_embedded']['wp:featuredmedia'][0]['source_url']}
