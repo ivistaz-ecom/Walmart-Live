@@ -31,7 +31,7 @@ const SuccessStories = () => {
     "Business Owner Training, Business Owner Training Programs, Sell Products Online in India";
   const desc =
     "The MSME spotlight and industry connect series is a collection of webinars that define Walmart Vriddhi’s MSME business training programs Learn more about these webinars here";
-  const banner = "/images/Success-Stories-Banner-1.png";
+  const banner = "/images/Banner 1-v2.jpg";
   const url = "https://www.walmartvriddhi.org/success-stories/";
 
   const fetchMovies = async () => {
@@ -164,10 +164,10 @@ const SuccessStories = () => {
           <Col className="p-0">
             <Image
               src={banner}
-              width={1200}
-              height={900}
+              width={1400}
+              height={740}
               style={{ background: "no-repeat", backgroundSize: "cover" }}
-              className="banner-img w-100 h-auto"
+              className="banner-img w-100 h-100"
             />
           </Col>
         </Row>
@@ -176,11 +176,11 @@ const SuccessStories = () => {
         <Row className="d-block d-md-none">
           <Col className="p-0">
             <Image
-              src="/images/Success-Stories-Banner-2.png"
-              width={900}
-              height={600}
+              src="/images/Banner-Mob-sucess.jpg"
+              width={414}
+              height={556}
               style={{ background: "no-repeat", backgroundSize: "cover" }}
-              className="banner-img w-100 h-auto p-0"
+              className="banner-img w-100 h-100 p-0"
             />
           </Col>
         </Row>
