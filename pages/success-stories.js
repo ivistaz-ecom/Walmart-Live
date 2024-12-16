@@ -15,6 +15,7 @@ import Floating from "../components/FloatingMenu";
 import Popups from "../components/PopUps";
 import Image from "next/image";
 import SuccessVideos from "../utils/fetchSuccessVideos";
+import Aos from "aos";
 
 const SuccessStories = () => {
   const pathname = usePathname();
@@ -30,7 +31,7 @@ const SuccessStories = () => {
     "Business Owner Training, Business Owner Training Programs, Sell Products Online in India";
   const desc =
     "The MSME spotlight and industry connect series is a collection of webinars that define Walmart Vriddhi’s MSME business training programs Learn more about these webinars here";
-  const banner = "/images/success_banner.jpeg";
+  const banner = "/images/Success-stories-page-banner-V2.png";
   const url = "https://www.walmartvriddhi.org/success-stories/";
 
   const fetchMovies = async () => {
@@ -159,13 +160,12 @@ const SuccessStories = () => {
       <Header />
       <div>
         {/* Desktop Banner */}
-        {/* <Row className="d-none d-md-block"> */}
-        <Row>
+        <Row className="d-none d-md-block">
           <Col className="p-0">
             <Image
               src={banner}
-              width="900"
-              height="620"
+              width={1200}
+              height={900}
               style={{ background: "no-repeat", backgroundSize: "cover" }}
               className="banner-img w-100 h-auto"
             />
@@ -173,17 +173,17 @@ const SuccessStories = () => {
         </Row>
 
         {/* Mobile Banner */}
-        {/* <Row className="d-block d-md-none">
+        <Row className="d-block d-md-none">
           <Col className="p-0">
             <Image
               src="/images/Success-Stories-page-banner-mob-version.png"
-              width="800"
-              height="620"
+              width={900}
+              height={600}
               style={{ background: "no-repeat", backgroundSize: "cover" }}
               className="banner-img w-100 h-auto p-0"
             />
           </Col>
-        </Row> */}
+        </Row>
       </div>
       <Brand />
       {/* <Container className="text-center wbg-light-gy">
