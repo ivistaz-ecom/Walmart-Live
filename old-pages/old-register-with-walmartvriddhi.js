@@ -12,10 +12,10 @@ import { RotatingLines } from 'react-loader-spinner'
 import NewsLetter from '../components/NewsLetter'
 import Floating from '../components/FloatingMenu'
 import Popups from '../components/PopUps'
-
-import Head from 'next/head';
+import Head from "next/head";
 
 export default function App() {
+
 
     const resetForm = () => {
         setBusiness('');
@@ -29,7 +29,7 @@ export default function App() {
         setSelectedSource("");
         setOtherSource("");
         SetSelectCountry('IN');
-        SetSelectState("");
+        SetSelectState('KA');
         // Add any additional state variables that need to be reset
     };
 
@@ -48,7 +48,10 @@ export default function App() {
             document.body.removeChild(script);
             clearTimeout(timeout);
         };
+
+
     },);
+
 
     const typeList = [
         { name: "Manufacturing" },
@@ -209,12 +212,13 @@ export default function App() {
     const [otherSource, setOtherSource] = useState(""); // Track the value of the "Other" source input
     const [isCheckboxChecked, setIsCheckboxChecked] = useState(true);
     const [selectCountry, SetSelectCountry] = useState('IN');
-    const [selectState, SetSelectState] = useState(null);
+    const [selectState, SetSelectState] = useState('KA');
 
 
     const router = useRouter();
     const { utm_source, utm_medium, utm_campaign, utm_id } = router.query;
     const query = router.query;
+
     const yourDate = new Date().toLocaleDateString('en-IN');
 
     const [hasErrors, setHasErrors] = useState(false);
@@ -482,6 +486,7 @@ export default function App() {
 
                 }
                 else if (msg == 'validation_failed') {
+
                     const fieldErrors = {};
                     const { status, invalid_fields } = response.data;
                     invalid_fields.forEach((field) => {
@@ -490,16 +495,21 @@ export default function App() {
                     setErrors(fieldErrors);
                     console.log(fieldErrors);
                     setIsCheckboxChecked(true);
+
+
                 }
+
                 //console.log(response.data)
             });
+
+
     }
+
 
     const title = "Register with WalmartVriddhi - Walmart Vriddhi"
     const desc = "Fill the form to be a part of the Walmart Vriddhi program and unlock your business growth!"
     const banner = "/images/registration_banner.png"
-    const url = "https://www.walmartvriddhi.org/register-with-walmartvriddhi/"
-
+    const url = 'https://www.walmartvriddhi.org/register-with-walmartvriddhi/';
 
     const structuredData = {
         "@context": "https://schema.org/",
@@ -781,15 +791,16 @@ export default function App() {
                         <Col className="wbg-white m-tm-none p-0" sm={6}>
 
                             <Image
-                                src='/images/register_img.png'
-                                width="300"
-                                height="800"
+                                src='/images/registration_banner.png'
+                                width="100"
+                                height="100"
                                 background='no-repeat'
                                 background-size='cover'
                                 isResponsive
                                 className="banner-img d-flex align-items-end w-100 h-100"
                                 lazyLoad
                             />
+
                         </Col>
                     </Row>
                 </Container>
