@@ -29,7 +29,7 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/register-with-walmartvriddhi',
+        source: 'https://staging.walmartvriddhi.org/register-with-walmartvriddhi',
         destination: 'https://retaillink.login.cert.wal-mart.com/register',
         permanent: true,
         
