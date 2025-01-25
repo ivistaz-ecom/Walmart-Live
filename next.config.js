@@ -23,6 +23,7 @@ module.exports = {
         permanent: true,
       },
       {
+
         source: '/register-with-walmart-marketplace',
         destination: 'https://retaillink.login.cert.wal-mart.com/register',
         permanent: true,
@@ -31,6 +32,15 @@ module.exports = {
         source: '/register-with-walmartvriddhi',
         destination: 'https://retaillink.login.cert.wal-mart.com/register',
         permanent: true,
+        
+        source: '/web.walmartvriddhi.org',
+        destination: 'https://retaillink.login.cert.wal-mart.com/register',
+        permanent: true, // This will issue a permanent redirect (HTTP 308)
+      },
+      {
+        source: '/web.walmartvriddhi.org',
+        destination: 'https://retaillink.login.cert.wal-mart.com/register',
+        permanent: true, // This will issue a permanent redirect (HTTP 308)2
       },
     ];
     console.log('Redirects:', redirects);
