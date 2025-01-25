@@ -11,8 +11,28 @@ module.exports = {
   },
 
   async redirects() {
-    return [
+    const redirects = [
       {
+        source: '/web.walmartvriddhi.org',
+        destination: 'https://retaillink.login.cert.wal-mart.com/register',
+        permanent: true,
+      },
+      {
+        source: '/web.walmartvriddhi.org',
+        destination: 'https://retaillink.login.cert.wal-mart.com/register',
+        permanent: true,
+      },
+      {
+
+        source: '/register-with-walmart-marketplace',
+        destination: 'https://retaillink.login.cert.wal-mart.com/register',
+        permanent: true,
+      },
+      {
+        source: '/register-with-walmartvriddhi',
+        destination: 'https://retaillink.login.cert.wal-mart.com/register',
+        permanent: true,
+        
         source: '/web.walmartvriddhi.org',
         destination: 'https://retaillink.login.cert.wal-mart.com/register',
         permanent: true, // This will issue a permanent redirect (HTTP 308)
@@ -23,5 +43,7 @@ module.exports = {
         permanent: true, // This will issue a permanent redirect (HTTP 308)2
       },
     ];
+    console.log('Redirects:', redirects);
+    return redirects;
   },
 }
