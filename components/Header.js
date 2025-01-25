@@ -53,7 +53,7 @@ const SuccessStories = () => {
 
             <Nav className="ms-auto d-lg-flex flex-row flex-nowrap d-none">
               <div className="d-flex flex-lg-row flex-column gap-lg-0 gap-2">
-                <Link target="_blank" href="https://retaillink.login.cert.wal-mart.com/register">
+                <Link target="_blank" href="/web.walmartvriddhi.org">
                   <Button className="rounded-5 py-2 mx-4 border-0" style={{ background: '#78BE21' }}>
                     Register for Walmart Vriddhi
                   </Button>
@@ -64,7 +64,7 @@ const SuccessStories = () => {
                     Register for Walmart Marketplace
                   </Button>
                 </Link> */}
-                <Link target="_blank" href="https://retaillink.login.cert.wal-mart.com/register">
+                <Link target="_blank" href="/web.walmartvriddhi.org">
                   <Button className="rounded-5 py-2 mx-4 border-0" style={{ background: '#FFC221' }}>
                     Register for Walmart Marketplace
                   </Button>
@@ -134,7 +134,7 @@ const SuccessStories = () => {
 
             <Nav className="d-flex flex-row flex-nowrap d-lg-none">
               <div className="d-flex flex-lg-row flex-column gap-lg-0 gap-2">
-                <Link target="_blank" href="https://retaillink.login.cert.wal-mart.com/register">
+                <Link target="_blank" href="/web.walmartvriddhi.org">
                   <Button className="rounded-5 py-2 mx-4 border-0 w-100" style={{ background: '#78BE21' }}>
                     Register for Walmart Vriddhi
                   </Button>
@@ -145,7 +145,7 @@ const SuccessStories = () => {
                     Register for Walmart Marketplace
                   </Button>
                 </Link> */}
-                <Link target="_blank" href="https://retaillink.login.cert.wal-mart.com/register">
+                <Link target="_blank" href="/web.walmartvriddhi.org">
                   <Button className="rounded-5 py-2 mx-4 border-0 w-100" style={{ background: '#FFC221' }}>
                     Register for Walmart Marketplace
                   </Button>
