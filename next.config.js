@@ -13,14 +13,14 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/register-with-walmart-marketplace',
-        destination: 'https://web.walmartvriddhi.org/',
+        source: '/web.walmartvriddhi.org',
+        destination: 'https://retaillink.login.cert.wal-mart.com/register',
         permanent: true, // This will issue a permanent redirect (HTTP 308)
       },
       {
-        source: '/register-with-walmartvriddhi',
-        destination: 'https://web.walmartvriddhi.org/',
-        permanent: true, // This will issue a permanent redirect (HTTP 308)
+        source: '/web.walmartvriddhi.org',
+        destination: 'https://retaillink.login.cert.wal-mart.com/register',
+        permanent: true, // This will issue a permanent redirect (HTTP 308)2
       },
     ];
   },
