@@ -16,14 +16,7 @@ function FloatingMenu() {
             </Col>
               </Row>
           </Container>
-          <Container className="float_phone">
-              <Row>
-              <Col className="d-flex align-items-center hide_phone" ><a href="tel:+916361056533">+91 6361 056 533</a></Col>
-            <Col >
-                  <MdLocalPhone size={40} fill="#fff" />
-            </Col>
-              </Row>
-        </Container>
+
         </Container>
     </div>
   )
