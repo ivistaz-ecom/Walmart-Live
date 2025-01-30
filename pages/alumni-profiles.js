@@ -255,7 +255,7 @@ const alumniProfiles = () => {
       </Container>
       <Popups />
       <Floating />
-      <NewsLetter />
+
       <Footer />
     </>
   );
