@@ -187,11 +187,6 @@ const Webinars = () => {
                     <p className="fs-4" style={{ width: "80%" }}>
                       The Walmart Vriddhi learning program equips you with
                       tailored support to help you unlock your growth potential.
-                      It provides you with interactive virtual learning
-                      experiences
-                      <br />
-                      through the mobile app available on iOS and Android, in
-                      English, Hindi and Tamil.
                     </p>
                     <div className="banner-ribbon arrow-bottom fs-3 bogle-medium mt-5 mb-4">
                       Business Fundamentals
