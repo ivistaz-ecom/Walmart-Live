@@ -72,7 +72,7 @@ const privacy = ({ data }) => {
       </Container>
       <Popups />
       <Floating />
-      <NewsLetter />
+      {/* <NewsLetter /> */}
       <Footer />
     </>
   )

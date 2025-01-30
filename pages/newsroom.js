@@ -265,7 +265,7 @@ const Webinars = () => {
             </Container>
             <Popups />
             <Floating />
-            <NewsLetter />
+
             <Footer />
         </>
     )

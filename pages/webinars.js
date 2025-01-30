@@ -136,7 +136,7 @@ const Webinars = ({ webinarvideo, spotlightvideo }) => {
       </Container>
       <Popups />
       <Floating />
-      <NewsLetter />
+
       <Footer />
     </>
   );
