@@ -1604,6 +1604,7 @@ float: inline-end;
         border-radius: 40px;
         padding: 4px;
         fill: #FDBD01;
+        text-align: center !important;
 }
 .float_email{
     position: absolute;

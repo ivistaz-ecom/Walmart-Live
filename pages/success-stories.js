@@ -253,7 +253,7 @@ const SuccessStories = () => {
           </div>
         </Container>
       </Container>
-      <NewsLetter />
+
       <Footer />
     </div>
   );

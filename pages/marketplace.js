@@ -541,17 +541,6 @@ function MarketPlace() {
       </Container>
 
       <Container className="my-5">
-        <Container className=" text-center mw-70">
-          <p className="fs-5 wbg-green p-4 text-white">
-            For more information, or to register, reach us at:{" "}
-            <Link
-              className="bogle-medium text-white text-decoration-none"
-              href="tel:+916361056533"
-            >
-              +91 6361 056 533
-            </Link>
-          </p>
-        </Container>
       </Container>
       <Container fluid className="wbg_grey p-4">
         <Container>

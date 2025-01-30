@@ -1,32 +1,33 @@
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import Image from 'next/image'
-import Brand from '../components/BrandLogo';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import NewsLetter from '../components/NewsLetter'
-import Floating from '../components/FloatingMenu'
-import Popups from '../components/PopUps'
-import { NextSeo } from 'next-seo';
-import { usePathname } from 'next/navigation'
-import Head from 'next/head';
+import { Container, Row, Col, Card } from "react-bootstrap";
+import Image from "next/image";
+import Brand from "../components/BrandLogo";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import NewsLetter from "../components/NewsLetter";
+import Floating from "../components/FloatingMenu";
+import Popups from "../components/PopUps";
+import { NextSeo } from "next-seo";
+import { usePathname } from "next/navigation";
+import Head from "next/head";
 
 function ContainerExample() {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const title = "Contact us  - Walmart Vriddhi";
-  const desc = "Contact us to receive tailored support for MSMEs and learn more about the program";
-  const banner = '/images/alumni_profile_banner.png';
-  const url = 'https://www.walmartvriddhi.org/contact-us/';
+  const desc =
+    "Contact us to receive tailored support for MSMEs and learn more about the program";
+  const banner = "/images/alumni_profile_banner.png";
+  const url = "https://www.walmartvriddhi.org/contact-us/";
 
   const structuredData = {
     "@context": "https://schema.org/",
     "@type": "WebSite",
-    "name": "walmartvriddhi",
-    "url": "https://www.walmartvriddhi.org/",
-    "potentialAction": {
+    name: "walmartvriddhi",
+    url: "https://www.walmartvriddhi.org/",
+    potentialAction: {
       "@type": "SearchAction",
-      "target": `${url}{search_term_string}`,
-      "query-input": "required name=search_term_string"
-    }
+      target: `${url}{search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (
@@ -44,7 +45,10 @@ function ContainerExample() {
         <meta property="og:description" content={desc} />
         <meta property="og:url" content={url} />
         <meta property="og:site_name" content={title} />
-        <meta property="article:modified_time" content="2023-07-06T15:35:40+00:00" />
+        <meta
+          property="article:modified_time"
+          content="2023-07-06T15:35:40+00:00"
+        />
         <meta property="og:image" content={banner} />
         <meta name="twitter:card" content="summary_large_image" />
         <script
@@ -58,43 +62,26 @@ function ContainerExample() {
         src="/images/contact_banner.jpeg"
         width="800"
         height="500"
-        background='no-repeat'
-        background-size='cover'
+        background="no-repeat"
+        background-size="cover"
         className="banner-img w-100 h-100"
-
       />
       <Brand />
       <Container>
         <Row>
           <Col className="text-center">
-            <p className="fs-2 bogle-medium walmart-default mt-4 pt-4">To learn more about the program and be part of our growth journey;</p>
+            <p className="fs-2 bogle-medium walmart-default mt-4 pt-4">
+              To learn more about the program and be part of our growth journey;
+            </p>
           </Col>
         </Row>
 
-        <Row>
-          <Col className="text-center ">
-            <Card className="align-items-center rounded-0 border-0 ">
+        <Row className="d-flex justify-content-center">
+          <Col md="auto" className="text-center">
+            <Card className="d-flex flex-column align-items-center rounded-0 border-0 bogle-bold">
               <Image
-                src='/images/call_us.png'
-                alt=''
-                width="100"
-                height="100"
-                className=""
-              />
-
-              <Card.Body>
-                <Card.Title>call us on</Card.Title>
-                <Card.Text className="bogle-medium fs-3">
-                  +91 6361 056 533
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col className="text-center d-flex justify-content-start">
-            <Card className="align-items-center rounded-0 border-0 bogle-bold">
-              <Image
-                src='/images/email_icon.png'
-                alt=''
+                src="/images/email_icon.png"
+                alt="Email Icon"
                 width="100"
                 height="100"
               />
@@ -108,14 +95,11 @@ function ContainerExample() {
           </Col>
         </Row>
       </Container>
+
       <Popups />
       <Floating />
-      <NewsLetter />
+
       <Footer />
-
-
-
-
     </>
   );
 }

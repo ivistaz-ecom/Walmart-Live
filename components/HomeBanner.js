@@ -14,22 +14,7 @@ const Home = () => {
     // </>
 
     <Carousel controls={false}>
-      <Carousel.Item>
-        <Image
-          className="w-100 m-tm-none h-100"
-          src="/images/Banner_01.png"
-          alt="walmart vridhi registartion"
-          width={900}
-          height={710}
-        />
-        <Image
-          className="w-100 d-sm-none h-100"
-          src="/images/HomeMobileBanne-1.jpeg"
-          alt="walmart vridhi"
-          width={900}
-          height={710}
-        />
-      </Carousel.Item>
+
       <Carousel.Item>
         <Image
           className="w-100 m-tm-none h-100"
@@ -88,7 +73,7 @@ const Home = () => {
         />
         <Image
           className="w-100 d-sm-none h-100"
-          src="/images/HomeMobileBanner-5.jpeg"
+          src="/images/HomeMobileBanne-1.jpeg"
           alt="walmart vridhi"
           width={900}
           height={710}

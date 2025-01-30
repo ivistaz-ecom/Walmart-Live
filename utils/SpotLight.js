@@ -8,19 +8,18 @@ import { RotatingLines } from "react-loader-spinner";
 import date from "date-and-time";
 import Image from "next/image";
 
-const SuccessStories = () => {
+const Spotlight = () => {
   const pathname = usePathname();
-  const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(10);
-  const [loading, setLoading] = useState(false);
-  const [next, setNext] = useState();
-  const [total, setTotal] = useState(0);
-  const [end, setEnd] = useState(false);
-  const [isOpen, setOpen] = useState(false);
-  const handleClose = () => setProduct(false);
-  const [currentProduct, setProduct] = useState(null);
-  const [currentUrl, setUrl] = useState(null);
-  const [currentTitle, setTitle] = useState(null);
+  const [spotlights, setSpotlights] = useState([]); // State to store spotlight posts
+  const [page, setPage] = useState(30); // Page number for pagination
+  const [loading, setLoading] = useState(false); // Loading state
+  const [total, setTotal] = useState(0); // Total number of posts
+  const [end, setEnd] = useState(false); // Whether all posts are fetched
+  const [currentProduct, setProduct] = useState(null); // Modal state
+  const [currentUrl, setUrl] = useState(null); // Video URL for modal
+  const [currentTitle, setTitle] = useState(null); // Modal title
+
+  const [fetchedPosts, setFetchedPosts] = useState(new Set()); // Track fetched posts' IDs
 
   const domain = typeof window !== "undefined" ? window.location.hostname : "";
 
@@ -28,10 +27,9 @@ const SuccessStories = () => {
     setLoading(true);
 
     try {
-      // define server
-
       let server;
 
+      // Determine the server based on domain
       if (
         domain === "walmartvriddhi.org" ||
         domain === "www.walmartvriddhi.org"
@@ -42,24 +40,33 @@ const SuccessStories = () => {
       } else {
         server = `${configData.STAG_SERVER}`;
       }
-      // server end
 
-      const [moviesResponse, categoriesResponse] = await Promise.all([
-        fetch(
-          `${configData.SERVER_URL}msme_spotlight?_embed&status=publish&production[]=${server}&per_page=${page}`
-        ),
-        fetch(`${configData.SERVER_URL}categories/13`),
-      ]);
+      // Fetch spotlight posts
+      const response = await fetch(
+        `${configData.SERVER_URL}msme_spotlight?_embed&status=publish&production[]=${server}&per_page=${page}`
+      );
+      const spotlightsData = await response.json();
 
-      const moviesData = await moviesResponse.json();
-      const categoriesData = await categoriesResponse.json();
-
-      if (moviesData.length === 0) {
-        setEnd(true);
+      if (spotlightsData.length === 0) {
+        setEnd(true); // End of posts, display "No more posts" message
       } else {
-        setMovies(moviesData);
-        setTotal(categoriesData.count);
-        setNext(categoriesData);
+        // Filter out already fetched posts
+        const newSpotlights = spotlightsData.filter(
+          (post) => !fetchedPosts.has(post.id)
+        );
+
+        if (newSpotlights.length > 0) {
+          // Append new posts to the existing ones
+          setSpotlights((prevSpotlights) => [
+            ...prevSpotlights,
+            ...newSpotlights,
+          ]);
+          newSpotlights.forEach((post) => {
+            fetchedPosts.add(post.id); // Mark posts as fetched
+          });
+        }
+
+        setTotal(spotlightsData.length); // Update the total count
       }
 
       setLoading(false);
@@ -67,7 +74,7 @@ const SuccessStories = () => {
       console.error(error);
       setLoading(false);
     }
-  }, [page]);
+  }, [page, fetchedPosts]);
 
   const debouncedFetchContent = useCallback(debounce(fetchContent, 500), [
     page,
@@ -79,22 +86,19 @@ const SuccessStories = () => {
   }, [page, debouncedFetchContent]);
 
   const loadMore = () => {
-    if (page >= total) {
-      setEnd(true);
+    if (spotlights.length >= total) {
+      setEnd(true); // Stop loading if we have fetched all posts
       return;
     }
-
-    setPage((oldPage) => oldPage + 4);
+    setPage((oldPage) => oldPage + 4); // Increment page number for pagination
   };
 
   return (
     <div>
+      {/* Modal for displaying video content */}
       <Modal
         show={currentProduct}
-        onHide={handleClose}
-        closeTimeoutMS={300}
-        isOpen={Boolean(currentProduct)}
-        onRequestClose={() => setProduct(null)}
+        onHide={() => setProduct(null)}
         size="lg"
       >
         <Modal.Header closeButton>
@@ -105,79 +109,77 @@ const SuccessStories = () => {
             width="100%"
             height="400"
             src={currentUrl}
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen="allowfullscreen"
-          ></iframe>
+            allowFullScreen
+          />
         </Modal.Body>
       </Modal>
+
+      {/* Spotlight Content Display */}
       <Container style={{ background: "#dee2e6" }} fluid>
         <Container>
           <Row className="pt-5">
-            {movies.map((post, index) => {
-              return (
-                <Col sm={4} className="p-3" key={index}>
-                  <Card className="webinar_post">
-                    {post["_embedded"]["wp:featuredmedia"][0]["source_url"] && (
-                      <Image
-                        src={
-                          post["_embedded"]["wp:featuredmedia"][0]["source_url"]
-                        }
-                        alt={post["title"]["rendered"]}
-                        className="img-hover webimg img-fluid"
-                        width={500}
-                        height={500}
-                        onClick={() => {
-                          setProduct(post.id);
-                          setUrl(post.acf.video_url);
-                          setTitle(post.title.rendered);
-                        }}
-                      />
-                    )}
-
-                    <Card.Body>
-                      <Card.Title
-                        className="fs-3 bogle-medium walmart-default"
-                        style={{ minHeight: 110 }}
-                        dangerouslySetInnerHTML={{
-                          __html: post["title"]["rendered"],
-                        }}
-                      />
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: post["acf"]["short_decription"],
-                        }}
-                        style={{ minHeight: 180 }}
-                      />
-                      <div style={{ minHeight: 190 }}>
-                        <Button variant="primary" className="pri-category mb-3">
-                          {post["acf"]["category"]}
-                        </Button>
-                        <h3 className="fs-5 bogle-medium mb-1">
-                          {post["acf"]["expert_name"]}
-                        </h3>
-                        <h3 className="fs-6 mb-3">
-                          {post["acf"]["expert_designation"]}
-                        </h3>
-                        <h3 className="fs-5 bogle-medium mb-1 ">
-                          {post["acf"]["expert_name_copy"]}
-                        </h3>
-                        <h3 className="fs-6 mb-3 ">
-                          {post["acf"]["expert_designation_copy"]}
-                        </h3>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              );
-            })}
+            {spotlights.map((post, index) => (
+              <Col sm={4} className="p-3" key={post.id}>
+                <Card className="webinar_post">
+                  {post["_embedded"]["wp:featuredmedia"][0]["source_url"] && (
+                    <Image
+                      src={post["_embedded"]["wp:featuredmedia"][0]["source_url"]}
+                      alt={post["title"]["rendered"]}
+                      className="img-hover webimg img-fluid"
+                      width={500}
+                      height={500}
+                      onClick={() => {
+                        setProduct(post.id);
+                        setUrl(post.acf.video_url);
+                        setTitle(post.title.rendered);
+                      }}
+                    />
+                  )}
+                  <Card.Body>
+                    <Card.Title
+                      className="fs-3 bogle-medium walmart-default"
+                      style={{ minHeight: 110 }}
+                      dangerouslySetInnerHTML={{
+                        __html: post["title"]["rendered"],
+                      }}
+                    />
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: post["acf"]["short_decription"],
+                      }}
+                      style={{ minHeight: 180 }}
+                    />
+                    <div style={{ minHeight: 190 }}>
+                      <Button variant="primary" className="pri-category mb-3">
+                        {post["acf"]["category"]}
+                      </Button>
+                      <h3 className="fs-5 bogle-medium mb-1">
+                        {post["acf"]["expert_name"]}
+                      </h3>
+                      <h3 className="fs-6 mb-3">
+                        {post["acf"]["expert_designation"]}
+                      </h3>
+                      <h3 className="fs-5 bogle-medium mb-1 ">
+                        {post["acf"]["expert_name_copy"]}
+                      </h3>
+                      <h3 className="fs-6 mb-3 ">
+                        {post["acf"]["expert_designation_copy"]}
+                      </h3>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
           </Row>
         </Container>
       </Container>
+
+      {/* Loading Spinner and Load More Button */}
       <section
         className="section text-center mb-3 pb-5"
         style={{ background: "#dee2e6" }}
-        fluid
       >
         {loading ? (
           <RotatingLines
@@ -195,7 +197,7 @@ const SuccessStories = () => {
         ) : (
           <div className="loadmodediv">
             {end ? (
-              <p>No more posts to load</p>
+              <p>No more posts to load</p> // Show message when all posts are loaded
             ) : (
               <Button
                 variant="primary"
@@ -212,4 +214,4 @@ const SuccessStories = () => {
   );
 };
 
-export default SuccessStories;
+export default Spotlight;

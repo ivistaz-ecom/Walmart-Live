@@ -75,7 +75,7 @@ const privacy = ({ data }) => {
       </Container>
       <Popups />
       <Floating />
-      <NewsLetter />
+
       <Footer />
     </>
   )

@@ -275,7 +275,7 @@ const post = ({ data }) => {
               </Container>
               <Popups />
               <Floating />
-              <NewsLetter />
+
               <Footer />
             </>
           );

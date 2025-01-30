@@ -75,8 +75,12 @@ function Footer() {
                             <hr />
                             <ul className="fs-4 list-unstyled">
                                 <li className="pb-4">For more information, contact us:</li>
-                                <li className="pb-4 f-text"><Link href="mailto:contactus@walmartvriddhi.org"><MdOutlineEmail className="tel_icon"/> contactus@walmartvriddhi.org</Link></li>
-                                <li className='f-text'><Link href="tel:+91 6361 056 533"><MdPhone className="tel_icon"/> +91 6361 056 533</Link></li>
+                                <ul className="list-unstyled d-flex gap-1">
+                                    <li><MdOutlineEmail className="tel_icon"/> </li>
+                                <li className="pb-4 f-text"><Link href="mailto:contactus@walmartvriddhi.org">
+                                contactus@walmartvriddhi.org</Link></li>
+                                </ul>
+
                             </ul>
                         </Col>
                         <Col sm={1}></Col>
